@@ -1,3 +1,15 @@
 from django.shortcuts import render
+from django.views import View
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
 
-# Create your views here.
+@method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
+class LandingPage(View):
+    
+    context = ""
+
+    def get(self, request):
+        return render(request, 'landing.html', context={}, content_type='text/html')
+
+    def post(self, request):
+        pass
