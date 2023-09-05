@@ -1,14 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Teh Tarik Jodi</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
     <link rel="icon" href="{% static 'systemaassets/logo.ico' %}" />
 </head>
+
 <body>
-    
+    <header>
+        <div class="logo">TEH TARIK JODI</div>
+        <div class="divider"></div>
+        <div class="nav">
+            <a href="/" class="active">Home</a>
+            <a href="#">Tentang Kami</a>
+            <!-- TODO: Ubah ke routing django @ipungg-junior -->
+            <a href="form.html">Franchise</a>
+            <a href="#">Kontak</a>
+            <a href="#">Testimoni</a>
+        </div>
+    </header>
+
+    <script>
+        const links = document.querySelectorAll('.nav a');
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                links.forEach(link => link.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
 </body>
+
 </html>
