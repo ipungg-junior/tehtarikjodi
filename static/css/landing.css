@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #E95122;
+    --secondary-color: #2F4076;
+}
+
+@font-face {
+    font-family: 'Bungee';
+    src: url('/static/fonts/Bungee-Regular.ttf') format('truetype');
+}
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/static/fonts/Lato-Black.ttf') format('truetype'),
+            url('/static/fonts/Lato-BlackItalic.ttf') format('truetype'),
+            url('/static/fonts/Lato-Bold.ttf') format('truetype'),
+            url('/static/fonts/Lato-BoldItalic.ttf') format('truetype'),
+            url('/static/fonts/Lato-Italic.ttf') format('truetype'),
+            url('/static/fonts/Lato-Light.ttf') format('truetype'),
+            url('/static/fonts/Lato-LightItalic.ttf') format('truetype'),
+            url('/static/fonts/Lato-Regular.ttf') format('truetype'),
+            url('/static/fonts/Lato-Thin.ttf') format('truetype'),
+            url('/static/fonts/Lato-ThinItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Mogena';
+        src: url('/static/fonts/Mogena.ttf') format('truetype');
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato', sans-serif;
+    }
+
+    header {
+        background-color: #fff;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .logo {
+        font-size: 36px;
+        font-weight: bold;
+        font-family: 'Bungee', sans-serif;
+        color: var(--primary-color);
+    }
+
+    .divider {
+        background-color: #2F4076;
+        height: 2px;
+        margin: 20px 0;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav a:hover:not(.active) {
+        background-color: var(--secondary-color);
+        color: #fff;
+    }
+
+    .active {
+        color: #fff !important;
+        background-color: var(--secondary-color);
+        border-radius: 20px;
+    }
