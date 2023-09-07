@@ -9,31 +9,85 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
     <link rel="icon" href="{% static 'systemaassets/logo.ico' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- HACK: For DEV -->
+    <!-- <meta http-equiv="refresh" content="5"> -->
+
+    <!-- Additional scripts and fonts and icon -->
+    <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
+    <script src="https://kit.fontawesome.com/45561a8e99.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
-        <div class="logo">TEH TARIK JODI</div>
+        <div class="logo animate__animated animate__fadeIn">
+            <img src="{% static 'systemaassets/LOGO-PNG.png' %}" alt="logo">
+        </div>
         <div class="divider"></div>
-        <div class="nav">
+        <div class="nav animate__animated animate__fadeIn">
             <a href="/" class="active">Home</a>
             <a href="#">Tentang Kami</a>
-            <!-- TODO: Ubah ke routing django @ipungg-junior -->
+            <!-- FIXME: Ubah ke routing django @ipungg-junior -->
             <a href="form.html">Franchise</a>
             <a href="#">Kontak</a>
             <a href="#">Testimoni</a>
         </div>
     </header>
 
+    <!-- Reasons Section -->
+    <div class="reasons-background-image">
+        <div class="reasons-container">
+            <h1 class="container-title animate__animated animate__fadeIn">
+                <span id="container-title1">Mengapa Memilih</span>
+                <span id="container-title2">Teh Tarik Jodi?</span>
+            </h1>
+            <div class="reasons animate__animated animate__slideInUp">
+                <div class="reason">
+                    <!-- FIXME: Ganti icon ke aset asli -->
+                    <i class="icon fa-solid fa-money-bill"></i>
+                    <h2 class="reason-title">AFFORDABLE</h2>
+                    <p class="reason-description" data-aos="fade-up">Berkomitmen untuk selalu menyajikan produk-produk yang dapat dinikmati
+                        semua kalangan</p>
+                </div>
+                <div class="reason">
+                    <!-- FIXME: Ganti icon ke aset asli -->
+                    <i class="icon fa-solid fa-atom"></i>
+                    <h2 class="reason-title">SUISTAINABLE</h2>
+                    <p class="reason-description" data-aos="fade-up">Konsistensi untuk memberikan keberlanjutan bisnis yang memiliki daya
+                        saing kompetitif</p>
+                </div>
+                <div class="reason">
+                    <!-- FIXME: Ganti icon ke aset asli -->
+                    <i class="icon fa-solid fa-leaf"></i>
+                    <h2 class="reason-title">FRESH</h2>
+                    <p class="reason-description" data-aos="fade-up">Dibuat secara fresh dan langsung dapat dinikmati oleh pelanggan dengan
+                        kualitas bahan baku pilihan serta rasa yang nikmat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="height: 500vh;"></div>
+
+    <!-- CircleType Initialization -->
     <script>
-        const links = document.querySelectorAll('.nav a');
-        links.forEach(link => {
-            link.addEventListener('click', function (e) {
-                links.forEach(link => link.classList.remove('active'));
-                link.classList.add('active');
-            });
-        });
+        new CircleType(document.getElementById('container-title1'))
+            .radius(660);
+        new CircleType(document.getElementById('container-title2'))
+            .radius(660);
     </script>
+
+    <!-- AOS Initialization -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Include custom JavaScript -->
+    <script src="{% static 'js/landing.js' %}"></script>
 </body>
 
 </html>
