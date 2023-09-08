@@ -94,7 +94,7 @@ header {
 /* Reasons section styles */
 .reasons-background-image {
     /* FIXME: ganti ke aset asli */
-    background-image: url('/static/imgs/testpic-reason.jpg');
+    background-image: url('/static/imgs/testpic-reason-2.JPG');
     background-size: cover;
     position: relative;
 }
