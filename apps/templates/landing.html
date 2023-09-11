@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- HACK: For DEV -->
-    <!-- <meta http-equiv="refresh" content="5"> -->
+    <!-- <meta http-equiv="refresh" content="3"> -->
 
     <!-- Additional scripts and fonts and icon -->
     <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
@@ -40,36 +40,82 @@
     <!-- Reasons Section -->
     <div class="reasons-background-image">
         <div class="reasons-container">
-            <h1 class="container-title animate__animated animate__fadeIn">
+            <h1 class="container-title">
                 <span id="container-title1">Mengapa Memilih</span>
                 <span id="container-title2">Teh Tarik Jodi?</span>
             </h1>
-            <div class="reasons animate__animated animate__slideInUp">
+            <div class="reasons">
                 <div class="reason">
                     <!-- FIXME: Ganti icon ke aset asli -->
                     <i class="icon fa-solid fa-money-bill"></i>
                     <h2 class="reason-title">AFFORDABLE</h2>
-                    <p class="reason-description" data-aos="fade-up">Berkomitmen untuk selalu menyajikan produk-produk yang dapat dinikmati
+                    <p class="reason-description">Berkomitmen untuk selalu menyajikan produk-produk yang dapat dinikmati
                         semua kalangan</p>
                 </div>
                 <div class="reason">
                     <!-- FIXME: Ganti icon ke aset asli -->
                     <i class="icon fa-solid fa-atom"></i>
                     <h2 class="reason-title">SUISTAINABLE</h2>
-                    <p class="reason-description" data-aos="fade-up">Konsistensi untuk memberikan keberlanjutan bisnis yang memiliki daya
+                    <p class="reason-description">Konsistensi untuk memberikan keberlanjutan bisnis yang memiliki daya
                         saing kompetitif</p>
                 </div>
                 <div class="reason">
                     <!-- FIXME: Ganti icon ke aset asli -->
                     <i class="icon fa-solid fa-leaf"></i>
                     <h2 class="reason-title">FRESH</h2>
-                    <p class="reason-description" data-aos="fade-up">Dibuat secara fresh dan langsung dapat dinikmati oleh pelanggan dengan
+                    <p class="reason-description">Dibuat secara fresh dan langsung dapat dinikmati oleh pelanggan dengan
                         kualitas bahan baku pilihan serta rasa yang nikmat</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- Title Section -->
+    <div class="title">
+        <div class="title-background-image">
+            <div class="title-container">
+                <h1 class="tilted-title" title="TEH TARIK JODI PARTNERSHIP"></h1>
+            </div>
+            <div class="title-desc">
+                <span>Kemitraan Asli Teh Tarik & Kopitiam</span>
+                <span class="number-one">#1</span>
+                <span>di Indonesia</span>
+            </div>
+        </div>
+
+        <div class="title-bottom">
+            <div class="title-image-row">
+                <img src="{% static 'imgs/testpic-title-row3.jpg' %}" alt="">
+                <img src="{% static 'imgs/testpic-title-row1.jpg' %}" alt="">
+                <img src="{% static 'imgs/testpic-title-row2.jpg' %}" alt="">
+            </div>
+            <div class="banner">
+                <div class="banner-text">
+                    Berdiri sejak 2017, sudah lebih dari <span style="font-weight: bold;">7 tahun Teh Tarik Jodi</span>
+                    mempunyai <span style="font-style: italic;">track-record</span> respon yang sangat baik dari para
+                    penikmatnya
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Section -->
+    <!-- <div class="quote-pattern"> -->
+        <div class="quote">
+            <div class="quote-pattern-top"></div>
+            <div class="quote-content">
+                <img src="{% static 'systemaassets/LOGO-PNG.png' %}" alt="">
+                <div class="quote-text">
+                    Terbukti, <span>Teh Tarik Jodi</span> selalu menjaga <span>konsistensi</span> kualitas rasa <span>produk</span> dan kualitas proses pengolahan <span>bahan baku.</span>
+                </div>
+            </div>
+            <div class="quote-pattern-bottom"></div>
+        </div>
+    <!-- </div> -->
+
+
+
+
     <div class="container" style="height: 500vh;"></div>
 
     <!-- CircleType Initialization -->
@@ -81,10 +127,10 @@
     </script>
 
     <!-- AOS Initialization -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
-    </script>
+    </script> -->
 
     <!-- Include custom JavaScript -->
     <script src="{% static 'js/landing.js' %}"></script>
