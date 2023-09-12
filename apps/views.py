@@ -13,3 +13,17 @@ class LandingPage(View):
 
     def post(self, request):
         pass
+
+class Simulation(View):
+
+    context = ""
+
+    def get(self, request):
+        return render(request, 'form.html', context={}, content_type='text/html')
+    
+    def post(self, request):
+        if (self.context == 'post-calculate'):
+            body_json = request.bodya
+            pass
+        
+        pass
