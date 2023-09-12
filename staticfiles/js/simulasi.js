@@ -1,0 +1,1 @@
+var inBiayaInvest = document.getElementById('input-biaya-investasi');
