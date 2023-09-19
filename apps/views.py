@@ -5,7 +5,6 @@ from django.views.decorators.cache import cache_control
 
 @method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
 class LandingPage(View):
-    
     context = ""
 
     def get(self, request):
@@ -14,8 +13,9 @@ class LandingPage(View):
     def post(self, request):
         pass
 
-class Simulation(View):
 
+@method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
+class Simulation(View):
     context = ""
 
     def get(self, request):
