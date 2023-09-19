@@ -9,10 +9,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
     <link rel="icon" href="{% static 'systemaassets/logo.ico' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- HACK: For DEV -->
-    <!-- <meta http-equiv="refresh" content="3"> -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
     <!-- Additional scripts and fonts and icon -->
     <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
@@ -23,14 +20,27 @@
 <body>
     <!-- Header Section -->
     <header>
-        <div class="logo animate__animated animate__fadeIn">
+        <div class="logo">
             <img src="{% static 'systemaassets/LOGO-PNG.png' %}" alt="logo">
         </div>
         <div class="divider"></div>
-        <div class="nav animate__animated animate__fadeIn">
+        <div class="burger-menu">
+            <div class="burger-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="nav-mobile">
+                <a href="/" class="active">Home</a>
+                <a href="#">Tentang Kami</a>
+                <a href="/simulasi-investasi/">Franchise</a>
+                <a href="#">Kontak</a>
+                <a href="#">Testimoni</a>
+            </div>
+        </div>
+        <div class="nav">
             <a href="/" class="active">Home</a>
             <a href="#">Tentang Kami</a>
-            <!-- FIXME: Ubah ke routing django @ipungg-junior -->
             <a href="/simulasi-investasi/">Franchise</a>
             <a href="#">Kontak</a>
             <a href="#">Testimoni</a>
@@ -181,7 +191,7 @@
         </div>
         <div class="map-zoom">
             <img src="{% static 'imgs/location-zoom.gif' %}" alt="" srcset="">
-<!-- 
+            <!-- 
             <video>
                 <source src="{% static 'vids/location-zoom.mp4' %}" type="video/mp4">
                 Your browser does not support the video tag
@@ -357,26 +367,153 @@
     <!-- Franchise Section -->
 
     <div class="franchise-section">
+        <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="franchise-stiker-top-left">
+        <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="franchise-sticker-top-right">
         <h1 class="franchise-title">
             <span id="franchise-title1">PAKET USAHA</span>
             <span id="franchise-title2" class="franchise-title2">TEH TARIK JODI</span>
         </h1>
-        <div class="stiker1"></div>
-        <div class="stiker2"></div>
-        <div class="frenchise-content">
-            <div class="stand">
-                <!-- <img src="{% static 'imgs/franchise-stand.png' %}" alt=""> -->
-            </div>
-            <div class="franchise-promo"></div>
+        <div class="stiker1">
+            <img src="{% static 'imgs/location-stiker.png' %}" alt="">
         </div>
+        <div class="stiker2">
+            <img src="{% static 'imgs/location-stiker.png' %}" alt="">
+        </div>
+        <div class="franchise-content">
+            <div class="stand">
+                <img src="{% static 'imgs/franchise-stand.png' %}" alt="">
+            </div>
+            <div class="franchise-promo">
+                <h2>Dapatkan Promo Kemitraan Khusus</h2>
+                <p>*Klik untuk Potongan Hingga <span>25%</span></p>
+                <button>KLIK DI SINI</button>
+            </div>
+        </div>
+        <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="franchise-stiker-bottom-left">
+        <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="franchise-sticker-bottom-right">
     </div>
 
     <!-- Menu Section -->
 
+    <div class="menu-section">
+        <div class="half-circle"></div>
+        <div class="stiker1">#BEINGAPARTNER</div>
+        <div class="stiker2">
+            <img src="{% static 'imgs/stiker-kanji.png' %}" alt="" srcset="">
+        </div>
+        <h2>OUR MENU</h2>
+        <div class="menu-slider">
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-tehTarik.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Teh Tarik</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-tehO.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Teh-O</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-matchaKotjok.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Matcha Kotjokk</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-kopitiamSusu.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Kopitiam Susu</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-kopiO.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Kopi-O</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+            <div class="card">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-top-right">
+                <img src="{% static 'imgs/product-coklatKotjok.png' %}" alt="" srcset="">
+                <div class="card-content">
+                    <h3>Coklat Kotjok</h3>
+                    <p>racikan teh murni Nusantara dipadukan dengan susu dan krimer</p>
+                </div>
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-left">
+                <img src="{% static 'imgs/stiker-bunga.png' %}" alt="" class="card-sticker-bottom-right">
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Section -->
-
-
-    <div class="container" style="height: 50vh;"></div>
+    <div class="contact-section">
+        <div class="contact-banner">
+            <img src="{% static 'imgs/contact-banner.png' %}" alt="">
+        </div>
+        <div class="contact">
+            <div class="contact-owner">
+                <img src="{% static 'imgs/contact-owner.png' %}" alt="">
+            </div>
+            <div class="contact-container">
+                <h3>Mari membangun bisnis sukses dengan kami!</h3>
+                <p>Dengan tujuan ingin membawa sesuatu yang berbeda di tengah - tengah masyarakat Indonesia. Sejak
+                    dikeluarkan pada tahun 2017 <span style="font-weight: bold;">Teh Tarik Jodi</span> mendapat respon yang sangat baik dari para
+                    penikmatnya, denga hasil yang positif ini membuat tim Teh Tarik Jodi akan mengembangkan lini bisnis
+                    jauh meluas ke seluruh Indonesia.</p>
+                <div class="contact-footer">
+                    <div class="contact-info">
+                        <div class="phone">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>0821-2000-2633</span>
+                        </div>
+                        <div class="email">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>tehtarikjodi@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-button">
+                        <button>CONTACT US</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="company">
+            PT. AKSELERA DUA KARYA
+        </div>
+        <div class="stiker1">
+            <img src="{% static 'imgs/stiker-j.png' %}" alt="" srcset="">
+        </div>
+        <div class="stiker2">
+            <img src="{% static 'imgs/stiker-teko.png' %}" alt="" srcset="">
+        </div>
+    </div>
 
     <!-- CircleType Initialization -->
     <script>
@@ -385,16 +522,11 @@
         new CircleType(document.getElementById('container-title2'))
             .radius(660);
         new CircleType(document.getElementById('franchise-title1'))
-            .radius(660);
+            .radius(770);
         new CircleType(document.getElementById('franchise-title2'))
-            .radius(660);
+            .radius(770);
     </script>
-
-    <!-- AOS Initialization -->
-    <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script> -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
     <!-- Include custom JavaScript -->
     <script src="{% static 'js/landing.js' %}"></script>
