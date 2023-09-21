@@ -19,11 +19,10 @@
 
 <body>
     <!-- Header Section -->
-    <header>
+    <header id="main-header">
         <div class="logo">
             <img src="{% static 'systemaassets/LOGO-PNG.png' %}" alt="logo">
         </div>
-        <div class="divider"></div>
         <div class="burger-menu">
             <div class="burger-icon">
                 <div class="bar"></div>
@@ -38,6 +37,7 @@
                 <a href="#">Testimoni</a>
             </div>
         </div>
+        <div class="divider"></div>
         <div class="nav">
             <a href="/" class="active">Home</a>
             <a href="#">Tentang Kami</a>
@@ -95,9 +95,22 @@
 
         <div class="title-bottom">
             <div class="title-image-row">
-                <img src="{% static 'imgs/compress/testpic-title-row3.jpg' %}" alt="">
-                <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="">
-                <img src="{% static 'imgs/compress/testpic-title-row2.jpg' %}" alt="">
+                        <img src="{% static 'imgs/compress/testpic-title-row3.jpg' %}" alt="">
+                        <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="">
+                        <img src="{% static 'imgs/compress/testpic-title-row2.jpg' %}" alt="">
+            </div>
+            <div class="title-image-slide">
+                <div class="slideshow">
+                    <div class="slide_one slide">
+                        <img src="{% static 'imgs/compress/testpic-title-row3.jpg' %}" alt="">
+                    </div>
+                    <div class="slide_two slide">
+                        <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="">
+                    </div>
+                    <div class="slide_three slide">
+                        <img src="{% static 'imgs/compress/testpic-title-row2.jpg' %}" alt="">
+                    </div>
+                </div>
             </div>
             <div class="banner">
                 <div class="banner-text">
@@ -191,13 +204,8 @@
         </div>
         <div class="map-zoom">
             <img src="{% static 'imgs/location-zoom.gif' %}" alt="" srcset="">
-            <!-- 
-            <video>
-                <source src="{% static 'vids/location-zoom.mp4' %}" type="video/mp4">
-                Your browser does not support the video tag
-            </video> -->
         </div>
-        <div class="hashtag">#BEINGAPARTNER</div>
+        <h3 class="hashtag">#BEINGAPARTNER</h3>
     </div>
 
     <!-- Event Section -->
@@ -214,6 +222,35 @@
         <div class="event-banner">
             <img src="{% static 'imgs/events-banner.png' %}" alt="" srcset="">
         </div>
+        <div class="events-slide">
+            <div class="events-slideshow">
+                <div class="event_slide_one event-slide">
+                    <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="" srcset="">
+                    <div class="event-desc">
+                        <p>Dewa 19 Konser Stadion Manahan</p>
+                    </div>
+                </div>
+                <div class="event_slide_two event-slide">
+                    <img src="{% static 'imgs/compress/testpic-title-row2.jpg' %}" alt="" srcset="">
+                    <div class="event-desc">
+                        <p>SMP Bintang Laut, Solo</p>
+                    </div>
+                </div>
+                <div class="event_slide_three event-slide">
+                    <img src="{% static 'imgs/compress/testpic-title-row3.jpg' %}" alt="" srcset="">
+                    <div class="event-desc">
+                        <p>PBAK UIN Raden Mas Said, Solo</p>
+                    </div>
+                </div>
+                <div class="event_slide_four event-slide">
+                    <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="" srcset="">
+                    <div class="event-desc">
+                        <p>Hello Market Solo Paragon 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="events">
             <div class="event">
                 <img src="{% static 'imgs/compress/testpic-title-row1.jpg' %}" alt="" srcset="">
@@ -300,6 +337,7 @@
             <div class="stiker2">
                 <img src="{% static 'imgs/compress/partner-owner.png' %}" alt="">
             </div>
+            <div class="partner-pattern-bottom"></div>
             <div class="partners">
                 <div class="partner">
                     <img src="{% static 'imgs/testpic-title-row1.jpg' %}" alt="" srcset="">
@@ -320,7 +358,6 @@
                     </div>
                 </div>
             </div>
-            <div class="partner-pattern-bottom"></div>
         </div>
     </div>
 
@@ -397,7 +434,7 @@
 
     <div class="menu-section">
         <div class="half-circle"></div>
-        <div class="stiker1">#BEINGAPARTNER</div>
+        <h3 class="stiker1">#BEINGAPARTNER</h3>
         <div class="stiker2">
             <img src="{% static 'imgs/stiker-kanji.png' %}" alt="" srcset="">
         </div>
@@ -484,7 +521,8 @@
             <div class="contact-container">
                 <h3>Mari membangun bisnis sukses dengan kami!</h3>
                 <p>Dengan tujuan ingin membawa sesuatu yang berbeda di tengah - tengah masyarakat Indonesia. Sejak
-                    dikeluarkan pada tahun 2017 <span style="font-weight: bold;">Teh Tarik Jodi</span> mendapat respon yang sangat baik dari para
+                    dikeluarkan pada tahun 2017 <span style="font-weight: bold;">Teh Tarik Jodi</span> mendapat respon
+                    yang sangat baik dari para
                     penikmatnya, denga hasil yang positif ini membuat tim Teh Tarik Jodi akan mengembangkan lini bisnis
                     jauh meluas ke seluruh Indonesia.</p>
                 <div class="contact-footer">

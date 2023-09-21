@@ -19,3 +19,18 @@ document.addEventListener('DOMContentLoaded', function () {
     burgerMenu.classList.toggle('active');
   });
 });
+
+let prevScrollPos = window.scrollY;
+const header = document.getElementById("main-header");
+
+window.onscroll = function() {
+    const currentScrollPos = window.scrollY;
+
+    if (prevScrollPos > currentScrollPos) {
+        header.style.top = "0";
+    } else {
+        header.style.top = `-${header.offsetHeight}em`;
+    }
+
+    prevScrollPos = currentScrollPos;
+}
