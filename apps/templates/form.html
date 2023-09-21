@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        body { 
+        body {
             margin: 20px;
         }
 
@@ -18,15 +18,25 @@
             height: 2px;
             margin: 20px 0;
         }
+
+        .btn-choice.clicked {
+            background-color: #e96d2f;
+            color: white;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 
 <body class="m-5">
+    {% csrf_token %}
     <h1>Investasi Awal</h1>
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Biaya</span>
+        <span class="input-group-text" id="basic-addon1">Biaya (Rp)</span>
         <input id="input-biaya-investasi" type="text" class="form-control" placeholder="Rp.14.500.000"
-            aria-describedby="basic-addon1">
+            aria-describedby="basic-addon1" value="14.500.000" disabled>
     </div>
     <div class="divider"></div>
     <h1>Penjualan</h1>
@@ -34,90 +44,204 @@
         <label class="input-group-text" for="inputGroupSelect01">CUP</label>
         <select class="form-select" id="input-jumlah-cup">
             <option selected>Pilih Jumlah Cup...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="50">50 pcs</option>
+            <option value="60">60 pcs</option>
+            <option value="70">70 pcs</option>
+            <option value="80">80 pcs</option>
+            <option value="100">100 pcs</option>
         </select>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Nominal Transaksi (Rp)</span>
+        <input id="input-biaya-per-cup" type="text" class="form-control" placeholder="Rp.-"
+            aria-describedby="basic-addon1" value="10.000" disabled>
     </div>
     <div class="input-group mb-3">
         <label class="input-group-text" for="inputGroupSelect01">JUMLAH HARI</label>
         <select class="form-select" id="input-jumlah-hari">
             <option selected>Pilih Jumlah Hari...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="30">30 Hari</option>
         </select>
     </div>
-    <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">OMZET KOTOR (1 bulan)</label>
-        <select class="form-select" id="inputGroupSelect01">
-            <option selected>Pilih Omzet...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+    <div class="input-group mb-3 hide" id="group-omset">
+        <label class="input-group-text" for="inputGroupSelect01">OMSET KOTOR (1 bulan)</label>
+        <input id="input-omset-kotor" type="text" class="form-control" aria-describedby="basic-addon1"
+            value="Rp.14.500.000" disabled>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 hide" id="group-hpp">
         <label class="input-group-text" for="inputGroupSelect01">HPP 50%</label>
-        <select class="form-select" id="inputGroupSelect01">
-            <option selected>Pilih HPP...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+        <input id="input-hpp" type="text" class="form-control" aria-describedby="basic-addon1" value="Rp.14.500.000"
+            disabled>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 hide" id="group-laba-kotor">
         <label class="input-group-text" for="inputGroupSelect01">LABA KOTOR</label>
-        <select class="form-select" id="inputGroupSelect01">
-            <option selected>Pilih Laba Kotor...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+        <input id="input-laba-kotor" type="text" class="form-control" aria-describedby="basic-addon1"
+            value="Rp.14.500.000" disabled>
     </div>
     <div class="divider"></div>
     <h1>Operasional</h1>
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Karyawan</span>
+        <span class="input-group-text" id="basic-addon1">Karyawan (Rp)</span>
         <input type="text" class="form-control" placeholder="Ketik Jumlah Karyawan..." aria-label="Username"
-            aria-describedby="basic-addon1">
+            aria-describedby="basic-addon1" id="input-karyawan" value="1.800.000">
     </div>
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Listrik</span>
-        <input type="text" class="form-control" placeholder="Rp ..." aria-label="Username"
-            aria-describedby="basic-addon1">
+        <span class="input-group-text" id="basic-addon1">Listrik (Rp)</span>
+        <input type="text" class="form-control" value="0" aria-label="Username" aria-describedby="basic-addon1"
+            id="input-listrik">
     </div>
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Lain - Lain</span>
-        <input type="text" class="form-control" placeholder="Rp ..." aria-label="Username"
-            aria-describedby="basic-addon1">
+        <span class="input-group-text" id="basic-addon1">Lain - Lain (Rp)</span>
+        <input type="text" class="form-control" value="0" aria-label="Username" aria-describedby="basic-addon1"
+            id="input-lain-lain">
+    </div>
+    <div class="input-group mb-3 hide" id="group-operasional">
+        <span class="input-group-text" id="basic-addon1">Beban Operasional Bulanan (Rp)</span>
+        <input type="text" class="form-control" placeholder="Rp 0" aria-label="Username" aria-describedby="basic-addon1"
+            id="input-beban-operasional" disabled>
     </div>
     <div class="divider"></div>
     <h1>Break Event Point</h1>
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Sewa Bangunan</span>
-        <input type="text" class="form-control" placeholder="Rp. 15.000.000,00" aria-label="Username"
-            aria-describedby="basic-addon1">
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Estimasi BEP</span>
-        <button class="btn btn-outline-secondary flex-fill" type="button">7</button>
-        <button class="btn btn-outline-secondary flex-fill" type="button">5</button>
-        <button class="btn btn-outline-secondary flex-fill" type="button">4</button>
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Laba Bersih</span>
-        <button class="btn btn-outline-secondary flex-fill" type="button">Rp4.750.000,00</button>
-        <button class="btn btn-outline-secondary flex-fill" type="button">Rp6.100.000,00</button>
-        <button class="btn btn-outline-secondary flex-fill" type="button">Rp7.450.000,00</button>
-    </div>
-    <div class="text-center">
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-success">Success</button>
+        <span class="input-group-text" id="basic-addon1">Sewa Bangunan (Rp)</span>
+        <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="basic-addon1"
+            id="input-sewa-bangunan">
     </div>
 
-    <script src="{% static 'js/simulasi.js' %}"></script>
+    <div class="input-group mb-3 hide" id="group-laba-bersih">
+        <span class="input-group-text" id="basic-addon1">Laba Bersih (Rp)</span>
+        <button class="btn btn-outline-secondary flex-fill strong" type="button" disabled id="output-lababersih"
+            style="color: black; font-weight: bold;">Rp4.750.000,00</button>
+    </div>
+
+    <div class="input-group mb-3 hide" id="group-bep">
+        <span class="input-group-text" id="basic-addon1 ">Estimasi BEP</span>
+        <button class="btn btn-outline-secondary flex-fill btn-choice" type="button" id="btn-bep"
+            style="font-weight: bold; color: black" disabled>7 Bulan</button>
+    </div>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-danger" id="btn-reset">RESET</button>
+        <button type="button" class="btn btn-info" id="btn-preview">PREVIEW</button>
+        <button type="button" class="btn btn-success" id="btn-simpan">SIMPAN</button>
+    </div>
+
+    <!-- <script src="{% static 'js/simulasi.js' %}"></script> -->
+    <script>
+        var inBiayaInvest = document.getElementById('input-biaya-investasi');
+        var inputJumlahCup = document.getElementById('input-jumlah-cup');
+        var inputJumlahHari = document.getElementById('input-jumlah-hari');
+        var inputOmsetKotor = document.getElementById('input-omset-kotor');
+        var inputHpp = document.getElementById('input-hpp');
+        var inputLabaKotor = document.getElementById('input-laba-kotor');
+        var inputOperasional = document.getElementById('input-beban-operasional');
+        var inputLainLain = document.getElementById('input-lain-lain');
+        var inputKaryawan = document.getElementById('input-karyawan');
+        var inputListrik = document.getElementById('input-listrik');
+        var inputSewaBangunan = document.getElementById('input-sewa-bangunan');
+
+        var groupOmset = document.getElementById('group-omset');
+        var groupHpp = document.getElementById('group-hpp');
+        var groupLabaKotor = document.getElementById('group-laba-kotor');
+        var groupLabaBersih = document.getElementById('group-laba-bersih');
+        var groupOperasional = document.getElementById('group-operasional');
+        var groupBEP = document.getElementById('group-bep');
+        var outputlaba = document.getElementById('output-lababersih');
+        const btnBEP = document.getElementById('btn-bep');
+        const btnReset = document.getElementById('btn-reset');
+        const btnPreview = document.getElementById('btn-preview');
+        const btnSimpan = document.getElementById('btn-simpan');
+
+        var gajiKaryawan = 0;
+        var biayaListrik = 0;
+        var biayaLain = 0;
+        var hargaPcup = 10000;
+        var totalOperasional = 0;
+        var bep = 0;
+        var labaBersih = 0;
+        var labaKotor = 0;
+
+        function formatRupiah(angka) {
+            var numberString = angka.toString();
+            var sisa = numberString.length % 3;
+            var rupiah = numberString.substr(0, sisa);
+            var ribuan = numberString.substr(sisa).match(/\d{3}/g);
+
+            if (ribuan) {
+                var separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            return rupiah;
+        }
+        function hapusTitik(inputText) {
+            // Periksa apakah inputText mengandung titik
+            if (inputText.includes('.')) {
+                // Jika ada titik, hapus titik
+                return parseInt(inputText.replace(/\./g, ''),10);
+            } else {
+                // Jika tidak ada titik, kembalikan nilai asli
+                return parseInt(inputText);
+            }
+        }
+
+        inputSewaBangunan.onchange = totalBep;
+
+        // Tambahkan event listener untuk mengubah kelas saat tombol diklik
+        function totalBep() {
+            var sewabangunan = parseInt((inputSewaBangunan.value).replace(/\./g, ""), 10);
+            labaBersih = labaKotor - (totalOperasional)
+            outputlaba.textContent = formatRupiah(labaBersih);
+            // Hitung BEP
+            bep = Math.round((14500000 + sewabangunan) / labaBersih);
+            inputSewaBangunan.value = formatRupiah(inputSewaBangunan.value);
+            groupLabaBersih.classList.remove('hide');
+            groupBEP.classList.remove('hide');
+            btnBEP.textContent = bep + " Bulan";
+        }
+
+        // Bussiness Logic Function
+        inputJumlahHari.addEventListener('change', function () {
+            groupOmset.classList.remove('hide');
+            groupHpp.classList.remove('hide');
+            groupLabaKotor.classList.remove('hide');
+            var omsetKotor = 0;
+            var hpp = 0;
+            var lbkotor = 0;
+            // omset kotor = jumlahcup X harga per cup X jumlahhari
+            omsetKotor = (inputJumlahCup.options[inputJumlahCup.selectedIndex].value) * (hargaPcup) * (inputJumlahHari.options[inputJumlahHari.selectedIndex].value);
+            hpp = (omsetKotor * 50) / 100;
+            lbkotor = omsetKotor - hpp;
+            inputOmsetKotor.value = formatRupiah(omsetKotor);
+            inputHpp.value = formatRupiah(hpp);
+            inputLabaKotor.value = formatRupiah(lbkotor);
+            labaKotor = lbkotor;
+        })
+
+
+        inputLainLain.onchange = hitungOperasional;
+
+        function hitungOperasional() {
+            var karyawan = hapusTitik(inputKaryawan.value);
+            var listrik = hapusTitik(inputListrik.value);
+            var lainlain = hapusTitik(inputLainLain.value);
+            totalOperasional = karyawan + listrik + lainlain;
+            inputListrik.value = formatRupiah(listrik);
+            inputLainLain.value = formatRupiah(lainlain);
+            inputOperasional.value = formatRupiah(totalOperasional);
+            groupOperasional.classList.remove('hide');
+        }
+
+        inputLainLain.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                hitungOperasional();
+            }
+        });
+
+        btnReset.addEventListener('click', function () {
+            location.reload();
+        })
+    </script>
 </body>
 
 </html>
