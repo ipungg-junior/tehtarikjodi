@@ -32,6 +32,13 @@
 
 <body class="m-5">
     {% csrf_token %}
+    <h1>Nomor Whatsapp</h1>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">+62</span>
+        <input id="input-nomor-hp" type="text" class="form-control" placeholder=""
+            aria-describedby="basic-addon1" required>
+    </div>
+    <div class="divider"></div>
     <h1>Investasi Awal</h1>
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Biaya (Rp)</span>
@@ -119,15 +126,17 @@
         <button class="btn btn-outline-secondary flex-fill btn-choice" type="button" id="btn-bep"
             style="font-weight: bold; color: black" disabled>7 Bulan</button>
     </div>
-
+    <a>{{idCookie}}</a>
     <div class="text-center">
         <button type="button" class="btn btn-danger" id="btn-reset">RESET</button>
-        <button type="button" class="btn btn-info" id="btn-preview">PREVIEW</button>
-        <button type="button" class="btn btn-success" id="btn-simpan">SIMPAN</button>
+        <button type="button" class="btn btn-info" id="btn-preview"><a
+                href="/simulasi-investasi/report/">Lanjutkan</a></button>
+
     </div>
 
     <!-- <script src="{% static 'js/simulasi.js' %}"></script> -->
     <script>
+        var noHp = document.getElementById('input-nomor-hp');
         var inBiayaInvest = document.getElementById('input-biaya-investasi');
         var inputJumlahCup = document.getElementById('input-jumlah-cup');
         var inputJumlahHari = document.getElementById('input-jumlah-hari');
@@ -160,6 +169,31 @@
         var bep = 0;
         var labaBersih = 0;
         var labaKotor = 0;
+        var hpp = 0;
+
+        function cekTeks() {
+            // Dapatkan nilai dari input teks
+
+            // Buat ekspresi reguler untuk mencocokkan huruf
+            var regex = /[A-Za-z]/;
+
+            // Periksa apakah input mengandung huruf
+            if (regex.test(noHp.value)) {
+                alert("Nomor Telepon tidak valid!");
+                return false;
+            } else {
+                if ((noHp.value).length > 13) {
+                    alert("Total karakter lebih dari 13!");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        }
+
+        var statNomor = cekTeks();
+
 
         function formatRupiah(angka) {
             var numberString = angka.toString();
@@ -178,7 +212,7 @@
             // Periksa apakah inputText mengandung titik
             if (inputText.includes('.')) {
                 // Jika ada titik, hapus titik
-                return parseInt(inputText.replace(/\./g, ''),10);
+                return parseInt(inputText.replace(/\./g, ''), 10);
             } else {
                 // Jika tidak ada titik, kembalikan nilai asli
                 return parseInt(inputText);
@@ -198,6 +232,42 @@
             groupLabaBersih.classList.remove('hide');
             groupBEP.classList.remove('hide');
             btnBEP.textContent = bep + " Bulan";
+            var dataToSend = {
+                no_hp: noHp.value,
+                jumlah_cup: (inputJumlahCup.options[inputJumlahCup.selectedIndex].value),
+                omset_kotor: inputOmsetKotor.value,
+                hpp: hpp,
+                laba_kotor: labaKotor,
+                karyawan: gajiKaryawan,
+                listrik: biayaListrik,
+                biaya_lain: biayaLain,
+                sewa_bangunan: sewabangunan
+            }
+            if (statNomor) {
+                var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                //push data to server
+                fetch('/simulasi-investasi/post-calculate/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Respon dari server telah diterima
+                        console.log('Respon dari server:', data);
+
+                        // Lakukan aksi selanjutnya di sini, misalnya berdasarkan respon dari server
+                    })
+                    .catch(error => {
+                        // Penanganan kesalahan jika permintaan gagal
+                        console.error('Kesalahan:', error);
+                    });
+            } else {
+                //input nomor salah
+            }
         }
 
         // Bussiness Logic Function
@@ -206,7 +276,6 @@
             groupHpp.classList.remove('hide');
             groupLabaKotor.classList.remove('hide');
             var omsetKotor = 0;
-            var hpp = 0;
             var lbkotor = 0;
             // omset kotor = jumlahcup X harga per cup X jumlahhari
             omsetKotor = (inputJumlahCup.options[inputJumlahCup.selectedIndex].value) * (hargaPcup) * (inputJumlahHari.options[inputJumlahHari.selectedIndex].value);

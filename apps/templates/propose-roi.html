@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Return of Investment</title>
+    <link rel="stylesheet" href="{% static 'css/invoice-roi.css' %}" media="all" />
+</head>
+
+<body>
+    <header class="clearfix" style="margin-left: 1em; margin-right: 1em;">
+        <div id="logo">
+            <img src="{% static 'systemaassets/LOGO-PNG.png' %}">
+        </div>
+        <div id="company">
+            <h2 class="name">Return of Investment - Simulation</h2>
+            <div>Phone  : {{no_hp}}</div>
+            <div>Doc-ID : PTJD-{{doc_id}}</div>
+        </div>
+        </div>
+    </header>
+    <main style="margin-left: 1em; margin-right: 1em;">
+        <div id="details" class="clearfix">
+            <div id="invoice">
+                <h1>Teh Tarik Jodi</h1>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="desc">Nilai Investasi</th>
+                        <th class="total">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="desc">
+                            <h3>Nominal Investasi</h3>Biaya Awal pembukaan usaha Teh Tarik Jodi.
+                        </td>
+                        <td class="total">Rp. 14.500.000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="desc">Variabel</th>
+                        <th class="total">Nominal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="desc">
+                            <h3>Jumlah Cup</h3>
+                        </td>
+                        <td class="total">{{jumlah_cup}} Cup</td>
+                    </tr>
+                    <tr>
+                        <td class="desc">
+                            <h3>Harga per Cup</h3>
+                        </td>
+                        <td class="total">Rp. 10.000</td>
+                    </tr>
+                    <tr>
+                        <td class="desc">
+                            <h3>Omset Kotor</h3>
+                        </td>
+                        <td class="total">Rp. {{omset_kotor}}</td>
+                    </tr>
+                    <tr>
+                        <td class="desc">
+                            <h3>HPP 50%</h3>
+                        </td>
+                        <td class="total">Rp. {{hpp}}</td>
+                    </tr>
+                    <tr>
+                        <td class="desc">
+                            <h3>Laba Kotor</h3>
+                        </td>
+                        <td class="total">Rp. {{laba_kotor}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="desc">Break Even Point</th>
+                        <th class="total">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="desc">
+                            <h3>Sewa Bangunan</h3>
+                        </td>
+                        <td class="total">Rp. {{sewa_bangunan}}</td>
+                    </tr>
+                    <tr>
+                        <td class="desc">
+                            <h3>Estimasi BEP</h3>
+                        </td>
+                        <td class="total">{{bep}} Bulan</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2">Investasi</td>
+                        <td>Rp. 14.500.000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2">Laba Kotor</td>
+                        <td>Rp. {{laba_kotor}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2">Laba Bersih</td>
+                        <td>Rp. {{laba_bersih}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div id="thanks">
+            Download
+        </div>
+    </main>
+    <footer>
+        This was created on a computer and is valid without the signature and seal.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        var btnDownload = document.getElementById('thanks');
+
+        btnDownload.addEventListener('click', function (){
+            btnDownload.style.display = "none";
+            const element = document.body; // Elemen yang akan diubah menjadi PDF
+            html2pdf().from(element).save("tehtarikjodi-{s{}}.pdf");
+            btnDownload.style.display = "initial";
+        })
+    </script>
+
+</body>
+
+
+
+</html>
