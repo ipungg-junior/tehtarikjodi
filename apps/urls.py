@@ -5,5 +5,5 @@ urlpatterns = [
     path('', LandingPage.as_view(context="")),
     path('simulasi-investasi/', Simulation.as_view(context="simulation")),
     path('simulasi-investasi/post-calculate/', Simulation.as_view(context="post-calculate")),
-    path('simulasi-investasi/report/', Simulation.as_view(context="report-simulation"))
+    path('simulasi-investasi/report/<str:idCookiePage>', Simulation.as_view(context="report-simulation"))
 ]

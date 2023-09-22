@@ -35,7 +35,7 @@ class LandingPage(View):
 class Simulation(View):
     context = ""
 
-    def get(self, request):
+    def get(self, request, idCookiePage=0):
         if (self.context == "simulation"):
             try:
                 # Ambil cookie sesi dari landing page, lacak di DB, buat baru jika tidak ada
@@ -48,16 +48,15 @@ class Simulation(View):
                 return response
             
         if (self.context == "report-simulation"):
+            
             return render(request, 'propose-roi.html', context={}, content_type='text/html')
     
     def post(self, request):
         if (self.context == 'post-calculate'):
             # Mengambil data JSON dari permintaan
             data = json.loads(request.body)
-            # Lakukan operasi yang diperlukan di sini dengan data yang diterima
-            print(data)
-            # Contoh: Mengembalikan respon JSON dari backend
-            response_data = {'status': '200'}
-            return JsonResponse(response_data)
+            # Lakukan save database
+
+            return render(request, 'propose-roi.html', context={data}, content_type='text/html')
         
         pass

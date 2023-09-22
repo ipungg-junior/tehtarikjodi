@@ -236,11 +236,11 @@
                 no_hp: noHp.value,
                 jumlah_cup: (inputJumlahCup.options[inputJumlahCup.selectedIndex].value),
                 omset_kotor: inputOmsetKotor.value,
-                hpp: hpp,
-                laba_kotor: labaKotor,
-                karyawan: gajiKaryawan,
-                listrik: biayaListrik,
-                biaya_lain: biayaLain,
+                hpp: formatRupiah(hpp),
+                laba_kotor: formatRupiah(labaKotor),
+                karyawan: formatRupiah(hapusTitik(inputKaryawan.value)),
+                listrik: inputListrik.value,
+                biaya_lain: inputLainLain.value,
                 sewa_bangunan: sewabangunan
             }
             if (statNomor) {
