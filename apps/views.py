@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
@@ -35,7 +35,7 @@ class LandingPage(View):
 class Simulation(View):
     context = ""
 
-    def get(self, request, idCookiePage=0):
+    def get(self, request):
         if (self.context == "simulation"):
             try:
                 # Ambil cookie sesi dari landing page, lacak di DB, buat baru jika tidak ada
@@ -48,15 +48,18 @@ class Simulation(View):
                 return response
             
         if (self.context == "report-simulation"):
-            
-            return render(request, 'propose-roi.html', context={}, content_type='text/html')
+            idCookie = request.COOKIES['idCookie']
+            # Ambil data form dari DB masukan ke context
+            ctx = {
+                'idCookie': idCookie,
+                'no_hp': ''
+                }
+            return render(request, 'propose-roi.html', context=ctx, content_type='text/html')
     
     def post(self, request):
         if (self.context == 'post-calculate'):
             # Mengambil data JSON dari permintaan
             data = json.loads(request.body)
+            idCookie = request.COOKIES['idCookie']
             # Lakukan save database
-
-            return render(request, 'propose-roi.html', context={data}, content_type='text/html')
-        
-        pass
+            return redirect(f'/simulasi-investasi/report/{idCookie}')

@@ -126,11 +126,9 @@
         <button class="btn btn-outline-secondary flex-fill btn-choice" type="button" id="btn-bep"
             style="font-weight: bold; color: black" disabled>7 Bulan</button>
     </div>
-    <a>{{idCookie}}</a>
     <div class="text-center">
         <button type="button" class="btn btn-danger" id="btn-reset">RESET</button>
-        <button type="button" class="btn btn-info" id="btn-preview"><a
-                href="/simulasi-investasi/report/">Lanjutkan</a></button>
+        <button type="button" class="btn btn-info" id="btn-preview"><a href="/simulasi-investasi/report/{{idCookie}}/">SIMPAN</a></button>
 
     </div>
 
@@ -254,17 +252,6 @@
                     },
                     body: JSON.stringify(dataToSend)
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Respon dari server telah diterima
-                        console.log('Respon dari server:', data);
-
-                        // Lakukan aksi selanjutnya di sini, misalnya berdasarkan respon dari server
-                    })
-                    .catch(error => {
-                        // Penanganan kesalahan jika permintaan gagal
-                        console.error('Kesalahan:', error);
-                    });
             } else {
                 //input nomor salah
             }
