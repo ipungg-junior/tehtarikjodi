@@ -1,0 +1,214 @@
+.btn-choice.clicked {
+    background-color: #e96d2f;
+    color: white;
+}
+
+.hide {
+    display: none;
+}
+
+:root {
+    --primary-color: #E95122;
+    --secondary-color: #2F4076;
+    --third-color: #E6DDCE;
+    --primary-font: 'Lato', sans-serif;
+    --secondary-font: 'Bungee', sans-serif;
+    --third-font: 'Mogena', sans-serif;
+}
+
+/* Define common font families and their variants */
+
+@font-face {
+    font-family: 'Lato';
+    font-weight: 100, 300, 400, 700;
+    font-style: normal, italic;
+    src: url('/static/fonts/Lato-Black.ttf') format('truetype'),
+        url('/static/fonts/Lato-BlackItalic.ttf') format('truetype'),
+        url('/static/fonts/Lato-Bold.ttf') format('truetype'),
+        url('/static/fonts/Lato-BoldItalic.ttf') format('truetype'),
+        url('/static/fonts/Lato-Italic.ttf') format('truetype'),
+        url('/static/fonts/Lato-Light.ttf') format('truetype'),
+        url('/static/fonts/Lato-LightItalic.ttf') format('truetype'),
+        url('/static/fonts/Lato-Regular.ttf') format('truetype'),
+        url('/static/fonts/Lato-Thin.ttf') format('truetype'),
+        url('/static/fonts/Lato-ThinItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bungee';
+    src: url('/static/fonts/Bungee-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mogena';
+    src: url('/static/fonts/Mogena.ttf') format('truetype');
+}
+
+/* Reset default style for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--third-color) !important;
+}
+
+/* Header styles */
+.half-circle {
+    position: relative;
+    background-color: var(--primary-color);
+    padding: 10em;
+    border-radius: 0 0 50% 50%;
+    overflow: hidden;
+    margin-bottom: 7em;
+}
+
+.header-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2em;
+}
+
+.header-section h3 {
+    background-color: var(--secondary-color);
+    border-radius: 2em;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 0.5em 1em;
+    color: white;
+    display: flex;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.header-section .social-media-icon {
+    display: flex;
+    justify-content: space-around;
+    width: 10%;
+}
+
+.social-media-icon .icon {
+    font-size: 1.5em;
+    color: #fff;
+    background-color: var(--secondary-color);
+    border-radius: 2em;
+    padding: 0.3em 0.35em;
+}
+
+.logo img {
+    position: absolute;
+    width: 40%;
+    top: -2%;
+    left: 28%;
+}
+
+/* Form styles */
+.form-container {
+    position: relative;
+    padding: 8em;
+}
+
+.form-container h1 {
+    color: var(--secondary-color);
+    font-family: var(--secondary-font);
+    font-size: 2em;
+}
+
+.divider {
+    background-color: var(--secondary-color);
+    height: 0.15em;
+    margin: 2em 0;
+}
+
+.input-text {
+    width: 30% !important;
+    align-content: center !important;
+    justify-content: flex-end !important;
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    font-size: 1.3em !important;
+    font-weight: 500 !important;
+    padding-right: 1em !important;
+    border-top-left-radius: 0.5em !important;
+    border-bottom-left-radius: 0.5em !important;
+}
+
+.input-form-control {
+    width: 70% !important;
+    color: black !important;
+    background-color: white !important;
+    border: 0.1em solid var(--primary-color) !important;
+    border-top-right-radius: 0.5em !important;
+    border-bottom-right-radius: 0.5em !important;
+}
+
+.input-form-select {
+    width: 70% !important;
+    color: black !important;
+    background-color: white !important;
+    background-size: 1em !important;
+    border: 0.1em solid var(--primary-color) !important;
+    border-top-right-radius: 0.5em !important;
+    border-bottom-right-radius: 0.5em !important;
+}
+
+.input-btn {
+    font-weight: bold !important;
+    color: black !important;
+    border-top-right-radius: 0.5em !important;
+    border-bottom-right-radius: 0.5em !important;
+    border: 0.1em solid var(--primary-color) !important;
+    background-color: white !important;
+}
+
+.text-center {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 2em 0 !important;
+}
+
+.text-center .btn {
+    width: 13% !important;
+    margin: 0 2em !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    border-radius: 0.5em !important;
+    padding: 1em !important;
+}
+
+.text-center i {
+    font-size: 1.2em !important;
+    color: white !important;
+}
+
+.text-center h3 {
+    margin: 0 !important;
+    font-size: 1.5em !important;
+    line-height: 0 !important;
+}
+
+.text-center a {
+    margin: 0 !important;
+    font-size: 1.5em !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+.btn-info {
+    background-color: seagreen !important;
+    border-color: seagreen !important;
+}
