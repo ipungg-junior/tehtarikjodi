@@ -63,3 +63,21 @@ class Simulation(View):
             idCookie = request.COOKIES['idCookie']
             # Lakukan save database
             return redirect(f'/simulasi-investasi/report/{idCookie}')
+        
+@method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
+class NotFoundPage(View):
+    context = ""
+
+    def get(self, request):
+        try:
+            # Ambil cookie sesi dari landing page, lacak di DB, buat baru jika tidak ada
+            idCookie = request.COOKIES['idCookie']
+            return render(request, '404.html', content_type='text/html', context={'idCookie': idCookie})
+        except KeyError:
+            newIdCookie = generate_random_string()
+            response = render(request, '404.html', content_type='text/html', context={'idCookie': newIdCookie})
+            response.set_cookie('idCookie', newIdCookie, max_age=180)
+            return response
+
+    def post(self, request):
+        pass

@@ -1,0 +1,103 @@
+@media screen and (max-width: 768px) {
+    .half-circle {
+        padding: 5em;
+        margin-bottom: 3em;
+    }
+
+    .header-section {
+        padding: 1em;
+    }
+
+    .header-section h3 {
+        font-size: 0.8em;
+    }
+
+    .header-section .social-media-icon {
+        width: 17%;
+    }
+
+    .social-media-icon .icon {
+        font-size: 1em;
+    }
+
+    .logo img {
+        width: 55%;
+        top: 3%;
+        left: 23%;
+    }
+}
+
+/* Form styles */
+@media screen and (max-width: 768px) {
+    .form-container {
+        padding: 3em;
+    }
+
+    .form-container h1 {
+        font-size: 1.2em;
+    }
+
+    .divider {
+        margin: 1.5em 0;
+    }
+
+    .input-group {
+        flex-direction: column !important;
+    }
+
+    .input-text {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        font-size: 0.8em !important;
+        padding-right: 0 !important;
+        border-top-left-radius: 0.5em !important;
+        border-top-right-radius: 0.5em !important;
+        border-bottom-left-radius: 0 !important;
+        border: 0 !important;
+    }
+
+    .input-form-control {
+        width: 100% !important;
+        font-size: 0.8em !important;
+        border-bottom-left-radius: 0.5em !important;
+        border-bottom-right-radius: 0.5em !important;
+        border-top-right-radius: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .input-form-select {
+        width: 100% !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 0.5em !important;
+        border-bottom-right-radius: 0.5em !important;
+        margin-left: 0 !important;
+        font-size: 0.8em !important;
+    }
+
+    .input-btn {
+        margin-left: 0 !important;
+        font-size: 0.8em !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 0.5em !important;
+        border-bottom-right-radius: 0.5em !important;
+    }
+
+    .text-center .btn {
+        width: 37% !important;
+        margin: 0 0.5em !important;
+        padding: 0.8em !important;
+    }
+
+    .text-center i {
+        font-size: 1em !important;
+    }
+
+    .text-center h3 {
+        font-size: 1.2em !important;
+    }
+
+    .text-center a {
+        font-size: 1.2em !important;
+    }
+}
+
