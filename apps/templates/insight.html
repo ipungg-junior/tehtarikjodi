@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Teh Tarik Jodi</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="page-wrapper">
+            <!-- Page header -->
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <!-- Page pre-title -->
+                            <div class="page-pretitle">
+                                Teh Tarik Jodi
+                            </div>
+                            <h2 class="page-title">
+                                Insight
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Page body -->
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-deck row-cards">
+                        <!-- Start content body -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Total Pengunjung</div>
+                                    </div>
+                                    <div class="h1 mb-3">{{total_visitor}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Pengunjung Hari Ini</div>
+                                    </div>
+                                    <div class="h1 mb-3">{{visitor_today}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Form Collection</h3>
+                                </div>
+                                <div class="table-responsive" style="overflow-y: scroll; height: 350px;">
+                                    <table class="table card-table table-vcenter text-nowrap datatable">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-1">No.
+                                                </th>
+                                                <th>Sesi ID</th>
+                                                <th>Nomor Hp</th>
+                                                <th>Cup</th>
+                                                <th>omset kotor</th>
+                                                <th>laba kotor</th>
+                                                <th>laba bersih</th>
+                                                <th>karyawan</th>
+                                                <th>listrik</th>
+                                                <th>lain-lain</th>
+                                                <th>total operasional</th>
+                                                <th>sewa bangunan</th>
+                                                <th>bep</th>
+                                                <th>waktu</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in collections %}
+                                            <tr>
+                                                <td><span class="number">{{ forloop.counter }}</span></td>
+                                                <td>{{obj.idCookie}}</td>
+                                                <td>{{obj.no_hp}}</td>
+                                                <td>{{obj.jumlah_cup}}</td>
+                                                <td>{{obj.omset_kotor}}</td>
+                                                <td>{{obj.laba_kotor}}</td>
+                                                <td>{{obj.laba_bersih}}</td>
+                                                <td>{{obj.karyawan}}</td>
+                                                <td>{{obj.listrik}}</td>
+                                                <td>{{obj.lain}}</td>
+                                                <td>{{obj.operasional}}</td>
+                                                <td>{{obj.sewa_bangunan}}</td>
+                                                <td>{{obj.bep}}</td>
+                                                <td>{{obj.created_at}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- Tabler Core -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+
+
+</body>
+
+</html>

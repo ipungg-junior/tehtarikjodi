@@ -107,8 +107,10 @@
             <input type="text" class="input-form-control form-control" value="0" aria-label="Username"
                 aria-describedby="basic-addon1" id="input-lain-lain">
         </div>
-        <div class="input-group mb-3 hide" id="group-operasional">
-            <span class="input-text input-group-text" id="basic-addon1">Beban Operasional Bulanan (Rp)</span>
+
+        <div class="input-group mb-3" id="group-operasional">
+            <span class="input-text input-group-text" id="basic-addon1" style="font-size: 15px !important;">Beban
+                Operasional Bulanan (Rp)</span>
             <input type="text" class="input-form-control form-control" placeholder="Rp 0" aria-label="Username"
                 aria-describedby="basic-addon1" id="input-beban-operasional" disabled>
         </div>
@@ -116,10 +118,9 @@
         <h1>Break Event Point</h1>
         <div class="input-group mb-3">
             <span class="input-text input-group-text" id="basic-addon1">Sewa Bangunan (Rp)</span>
-            <input type="text" class="input-form-control form-control" placeholder="0" aria-label="Username"
+            <input type="text" class="input-form-control form-control" value="0" aria-label="Username"
                 aria-describedby="basic-addon1" id="input-sewa-bangunan">
         </div>
-
         <div class="input-group mb-3 hide" id="group-laba-bersih">
             <span class="input-text input-group-text" id="basic-addon1">Laba Bersih (Rp)</span>
             <button class="input-btn btn btn-outline-secondary flex-fill strong" type="button" disabled
@@ -129,186 +130,26 @@
         <div class="input-group mb-3 hide" id="group-bep">
             <span class="input-text input-group-text" id="basic-addon1 ">Estimasi BEP</span>
             <button class="input-btn btn btn-outline-secondary flex-fill btn-choice" type="button" id="btn-bep"
-                disabled>7 Bulan</button>
+                disabled>X Bulan</button>
         </div>
         <div class="text-center">
             <button type="button" class="btn btn-danger" id="btn-reset">
                 <i class="fa-solid fa-arrows-rotate"></i>
                 <h3>RESET</h3>
             </button>
-            <button type="button" class="btn btn-info" id="btn-preview">
-                <i class="fa-solid fa-floppy-disk"></i>
-                <a href="/simulasi-investasi/report/{{idCookie}}/">SIMPAN</a>
+            <button type="button" class="btn btn-info" id="btn-kalkulasi">
+                <i class="fa-solid fa-floppy-disk" style="margin-right: .3em;"></i>
+                <a>Kalkulasi</a>
+            </button>
+            <button type="button" class="btn btn-info" id="btn-preview" style="display: none !important;">
+                <i class="fa-solid fa-floppy-disk" style="margin-right: .3em;"></i>
+                <a>Print</a>
             </button>
         </div>
     </div>
 
-    <!-- <script src="{% static 'js/simulasi.js' %}"></script> -->
-    <script>
-        var noHp = document.getElementById('input-nomor-hp');
-        var inBiayaInvest = document.getElementById('input-biaya-investasi');
-        var inputJumlahCup = document.getElementById('input-jumlah-cup');
-        var inputJumlahHari = document.getElementById('input-jumlah-hari');
-        var inputOmsetKotor = document.getElementById('input-omset-kotor');
-        var inputHpp = document.getElementById('input-hpp');
-        var inputLabaKotor = document.getElementById('input-laba-kotor');
-        var inputOperasional = document.getElementById('input-beban-operasional');
-        var inputLainLain = document.getElementById('input-lain-lain');
-        var inputKaryawan = document.getElementById('input-karyawan');
-        var inputListrik = document.getElementById('input-listrik');
-        var inputSewaBangunan = document.getElementById('input-sewa-bangunan');
-
-        var groupOmset = document.getElementById('group-omset');
-        var groupHpp = document.getElementById('group-hpp');
-        var groupLabaKotor = document.getElementById('group-laba-kotor');
-        var groupLabaBersih = document.getElementById('group-laba-bersih');
-        var groupOperasional = document.getElementById('group-operasional');
-        var groupBEP = document.getElementById('group-bep');
-        var outputlaba = document.getElementById('output-lababersih');
-        const btnBEP = document.getElementById('btn-bep');
-        const btnReset = document.getElementById('btn-reset');
-        const btnPreview = document.getElementById('btn-preview');
-        const btnSimpan = document.getElementById('btn-simpan');
-
-        var gajiKaryawan = 0;
-        var biayaListrik = 0;
-        var biayaLain = 0;
-        var hargaPcup = 10000;
-        var totalOperasional = 0;
-        var bep = 0;
-        var labaBersih = 0;
-        var labaKotor = 0;
-        var hpp = 0;
-
-        function cekTeks() {
-            // Dapatkan nilai dari input teks
-
-            // Buat ekspresi reguler untuk mencocokkan huruf
-            var regex = /[A-Za-z]/;
-
-            // Periksa apakah input mengandung huruf
-            if (regex.test(noHp.value)) {
-                alert("Nomor Telepon tidak valid!");
-                return false;
-            } else {
-                if ((noHp.value).length > 13) {
-                    alert("Total karakter lebih dari 13!");
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-        }
-
-        var statNomor = cekTeks();
-
-
-        function formatRupiah(angka) {
-            var numberString = angka.toString();
-            var sisa = numberString.length % 3;
-            var rupiah = numberString.substr(0, sisa);
-            var ribuan = numberString.substr(sisa).match(/\d{3}/g);
-
-            if (ribuan) {
-                var separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-
-            return rupiah;
-        }
-        function hapusTitik(inputText) {
-            // Periksa apakah inputText mengandung titik
-            if (inputText.includes('.')) {
-                // Jika ada titik, hapus titik
-                return parseInt(inputText.replace(/\./g, ''), 10);
-            } else {
-                // Jika tidak ada titik, kembalikan nilai asli
-                return parseInt(inputText);
-            }
-        }
-
-        inputSewaBangunan.onchange = totalBep;
-
-        // Tambahkan event listener untuk mengubah kelas saat tombol diklik
-        function totalBep() {
-            var sewabangunan = parseInt((inputSewaBangunan.value).replace(/\./g, ""), 10);
-            labaBersih = labaKotor - (totalOperasional)
-            outputlaba.textContent = formatRupiah(labaBersih);
-            // Hitung BEP
-            bep = Math.round((14500000 + sewabangunan) / labaBersih);
-            inputSewaBangunan.value = formatRupiah(inputSewaBangunan.value);
-            groupLabaBersih.classList.remove('hide');
-            groupBEP.classList.remove('hide');
-            btnBEP.textContent = bep + " Bulan";
-            var dataToSend = {
-                no_hp: noHp.value,
-                jumlah_cup: (inputJumlahCup.options[inputJumlahCup.selectedIndex].value),
-                omset_kotor: inputOmsetKotor.value,
-                hpp: formatRupiah(hpp),
-                laba_kotor: formatRupiah(labaKotor),
-                karyawan: formatRupiah(hapusTitik(inputKaryawan.value)),
-                listrik: inputListrik.value,
-                biaya_lain: inputLainLain.value,
-                sewa_bangunan: sewabangunan
-            }
-            if (statNomor) {
-                var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-                //push data to server
-                fetch('/simulasi-investasi/post-calculate/', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': csrfToken,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dataToSend)
-                })
-            } else {
-                //input nomor salah
-            }
-        }
-
-        // Bussiness Logic Function
-        inputJumlahHari.addEventListener('change', function () {
-            groupOmset.classList.remove('hide');
-            groupHpp.classList.remove('hide');
-            groupLabaKotor.classList.remove('hide');
-            var omsetKotor = 0;
-            var lbkotor = 0;
-            // omset kotor = jumlahcup X harga per cup X jumlahhari
-            omsetKotor = (inputJumlahCup.options[inputJumlahCup.selectedIndex].value) * (hargaPcup) * (inputJumlahHari.options[inputJumlahHari.selectedIndex].value);
-            hpp = (omsetKotor * 50) / 100;
-            lbkotor = omsetKotor - hpp;
-            inputOmsetKotor.value = formatRupiah(omsetKotor);
-            inputHpp.value = formatRupiah(hpp);
-            inputLabaKotor.value = formatRupiah(lbkotor);
-            labaKotor = lbkotor;
-        })
-
-
-        inputLainLain.onchange = hitungOperasional;
-
-        function hitungOperasional() {
-            var karyawan = hapusTitik(inputKaryawan.value);
-            var listrik = hapusTitik(inputListrik.value);
-            var lainlain = hapusTitik(inputLainLain.value);
-            totalOperasional = karyawan + listrik + lainlain;
-            inputListrik.value = formatRupiah(listrik);
-            inputLainLain.value = formatRupiah(lainlain);
-            inputOperasional.value = formatRupiah(totalOperasional);
-            groupOperasional.classList.remove('hide');
-        }
-
-        inputLainLain.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                hitungOperasional();
-            }
-        });
-
-        btnReset.addEventListener('click', function () {
-            location.reload();
-        })
-    </script>
+    <script src="{% static 'js/simulasi.js' %}"></script>
+    
 </body>
 
 </html>
