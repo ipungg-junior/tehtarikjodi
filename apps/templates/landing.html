@@ -7,8 +7,14 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Teh Tarik Jodi</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- default css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/landing.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing-responsive-mobile.min.css' %}">
+
+    <!-- new rev cs -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/landing-responsive-mobile.css' %}"> -->
+
     <link rel="icon" href="{% static 'systemaassets/logo.ico' %}" />
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
@@ -34,18 +40,18 @@
             </div>
             <div class="nav-mobile">
                 <a href="/" class="active">Home</a>
-                <a href="/404/">Tentang Kami</a>
+                <a href="#paket-mitra">Tentang Kami</a>
                 <a href="/simulasi-investasi/">Franchise</a>
-                <a href="/404/">Kontak</a>
+                <a href="#contact">Kontak</a>
                 <a href="/404/">Testimoni</a>
             </div>
         </div>
         <div class="divider"></div>
         <div class="nav">
             <a href="/" class="active">Home</a>
-            <a href="/404/">Tentang Kami</a>
+            <a href="#paket-mitra">Tentang Kami</a>
             <a href="/simulasi-investasi/">Franchise</a>
-            <a href="/404/">Kontak</a>
+            <a href="#contact">Kontak</a>
             <a href="/404/">Testimoni</a>
         </div>
     </header>
@@ -209,7 +215,8 @@
             <img src="{% static 'imgs/location-map-indonesia.png' %}" alt="" srcset="">
         </div>
         <div class="map-zoom">
-            <a href="https://www.google.com/maps/search/Teh+Tarik+Jodi/@-7.3477018,110.397893,9z/data=!3m1!4b1?entry=ttu" target="_blank">
+            <a href="https://www.google.com/maps/search/Teh+Tarik+Jodi/@-7.3477018,110.397893,9z/data=!3m1!4b1?entry=ttu"
+                target="_blank">
                 <img src="{% static 'imgs/location-zoom.gif' %}" alt="" srcset="">
             </a>
         </div>
@@ -236,24 +243,33 @@
                     <img src="{% static 'imgs/compress/event-dewa.webp' %}" alt="" srcset="">
                     <div class="event-desc">
                         <p>Dewa 19 Konser Stadion Manahan</p>
+                        <hr style="width: 100%;">
+                        <p>29 Juli 2023</p>
                     </div>
                 </div>
                 <div class="event_slide_two event-slide">
                     <img src="{% static 'imgs/compress/event-bl.webp' %}" alt="" srcset="">
                     <div class="event-desc">
                         <p>SMP Bintang Laut, Solo</p>
+                        <hr style="width: 100%;">
+                        <p>27 - 29 Juli 2023</p>
                     </div>
                 </div>
                 <div class="event_slide_three event-slide">
                     <img src="{% static 'imgs/compress/event-bali.webp' %}" alt="" srcset="">
                     <div class="event-desc">
-                        <p>PBAK UIN Raden Mas Said, Solo</p>
+                        <p>SOLO BATIK MUSIC FESTIVAL
+                            (SBMF 2023) Mangkunegaran</p>
+                        <hr style="width: 100%;">
+                        <p>30 Sep - 2 Okt 2023</p>
                     </div>
                 </div>
                 <div class="event_slide_four event-slide">
                     <img src="{% static 'imgs/compress/event-sopa.webp' %}" alt="" srcset="">
                     <div class="event-desc">
                         <p>Hello Market Solo Paragon 2023</p>
+                        <hr style="width: 100%;">
+                        <p>13 - 17 September 2023</p>
                     </div>
                 </div>
             </div>
@@ -264,24 +280,33 @@
                 <img src="{% static 'imgs/compress/event-dewa.webp' %}" alt="" srcset="">
                 <div class="event-desc">
                     <p>Dewa 19 Konser Stadion Manahan</p>
+                    <hr style="width: 100%;">
+                    <p style="font-size: 12px;">29 Juli 2023</p>
                 </div>
             </div>
             <div class="event">
                 <img src="{% static 'imgs/compress/event-bl.webp' %}" alt="" srcset="">
                 <div class="event-desc">
                     <p>SMP Bintang Laut, Solo</p>
+                    <hr style="width: 100%;">
+                    <p style="font-size: 12px;">27 - 29 Juli 2023</p>
                 </div>
             </div>
             <div class="event">
                 <img src="{% static 'imgs/compress/event-bali.webp' %}" alt="" srcset="">
                 <div class="event-desc">
-                    <p>PBAK UIN Raden Mas Said, Solo</p>
+                    <p>SOLO BATIK MUSIC FESTIVAL
+                        (SBMF 2023) Mangkunegaran</p>
+                    <hr style="width: 100%;">
+                    <p style="font-size: 12px;">30 Sep - 2 Okt 2023</p>
                 </div>
             </div>
             <div class="event">
                 <img src="{% static 'imgs/compress/event-sopa.webp' %}" alt="" srcset="">
                 <div class="event-desc">
                     <p>Hello Market Solo Paragon 2023</p>
+                    <hr style="width: 100%;">
+                    <p style="font-size: 12px;">13 - 17 September 2023</p>
                 </div>
             </div>
         </div>
@@ -301,7 +326,7 @@
                         <h4>Belum Buka Udah Antri!</h4>
                         <p>seloinfo.id</p>
                     </div>
-                    
+
                 </div>
                 <div class="article-img">
                     <img src="{% static 'imgs/compress/partner1.webp' %}" alt="">
@@ -333,38 +358,42 @@
                 </div>
             </div>
         </div>
-        <div class="partners-showcase">
+        <div class="partners-showcase" style="margin-top: 3em;">
             <div class="partner-pattern-top"></div>
             <div class="partner-title">MITRA SUKSES TEH TARIK JODI</div>
             <div class="stiker2">
                 <img src="{% static 'imgs/compress/partner-owner.webp' %}" alt="">
             </div>
-            <div class="partner-pattern-bottom"></div>
             <div class="partners">
                 <div class="partner">
                     <img src="{% static 'imgs/compress/mitra-manahan.webp' %}" alt="" srcset="">
                     <div class="partner-desc">
-                        <p>Outlet Teh Tarik Jodi Manahan</p>
+                        <p style="font-size: .9em;">Outlet Teh Tarik Jodi Manahan</p>
+                        <p>Jl. Menteri Supeno No.3, Manahan, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57139</p>
                     </div>
                 </div>
                 <div class="partner">
                     <img src="{% static 'imgs/compress/mitra-kawatan.webp' %}" alt="" srcset="">
                     <div class="partner-desc">
-                        <p>Outlet Teh Tarik Jodi Kawatan</p>
+                        <p style="font-size: .9em;">Outlet Teh Tarik Jodi Kawatan</p>
+                        <p>Jl. Moh. Yamin No.64, Jayengan, Kec. Serengan, Kota Surakarta, Jawa Tengah 57153</p>
                     </div>
                 </div>
                 <div class="partner">
                     <img src="{% static 'imgs/compress/mitra-ums.webp' %}" alt="" srcset="">
                     <div class="partner-desc">
-                        <p>Outlet Teh Tarik Jodi UMS</p>
+                        <p style="font-size: .9em;">Outlet Teh Tarik Jodi UMS</p>
+                        <p>Jl. Rajawali Raya, Geduren, Gonilan, Kec. Kartasura, Kabupaten Sukoharjo, Jawa Tengah 57169
+                        </p>
                     </div>
                 </div>
             </div>
+            <div class="partner-pattern-bottom"></div>
         </div>
     </div>
 
-    <!-- Influencer section 2 -->
-    <div class="video-influencer-section2">
+    <!-- Influencer section 2 original -->
+    <!-- <div class="video-influencer-section2">
         <h2>Video Influencer</h2>
         <div class="stiker1">
             <img src="{% static 'imgs/compress/stiker-harimau-orange.webp' %}" alt="" srcset="">
@@ -374,6 +403,36 @@
                 <source src="{% static 'vids/influencer2.mp4' %}" type="video/mp4">
                 Your browser does not support the video tag
             </video>
+        </div>
+        <div class="stiker2">
+            <img src="{% static 'imgs/compress/stiker-j.webp' %}" alt="" srcset="">
+        </div>
+        <div class="stiker3">
+            <img src="{% static 'imgs/compress/stiker-teko.webp' %}" alt="" srcset="">
+        </div>
+    </div> -->
+
+    <!-- Influencer section 2 revisi-->
+    <div class="video-influencer-section2">
+        <div class="stiker-semangatpagi">
+            <img src="{% static 'imgs/compress/stiker-semangatpagi.webp' %}" alt="" srcset="">
+        </div>
+        <div class="stiker3">
+            <img src="{% static 'imgs/stiker-teko.png' %}" alt="" srcset="">
+        </div>
+        <div class="stiker1">
+            <img src="{% static 'imgs/compress/stiker-harimau-orange.webp' %}" alt="" srcset="">
+        </div>
+        <div class="events-photo">
+            <div class="event-photo">
+                <img src="{% static 'imgs/compress/anis.webp' %}" alt="" srcset="">
+            </div>
+            <div class="event-photo">
+                <img src="{% static 'imgs/compress/giring.webp' %}" alt="" srcset="">
+            </div>
+            <div class="event-photo">
+                <img src="{% static 'imgs/compress/gilga.webp' %}" alt="" srcset="">
+            </div>
         </div>
         <div class="stiker2">
             <img src="{% static 'imgs/compress/stiker-j.webp' %}" alt="" srcset="">
@@ -403,11 +462,11 @@
     </div>
 
     <!-- Franchise Section -->
-    <div class="franchise-section">
+    <div class="franchise-section" id="paket-mitra">
         <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-stiker-top-left">
         <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-sticker-top-right">
         <h1 class="franchise-title">
-            <span id="franchise-title1">PAKET USAHA</span>
+            <span id="franchise-title1">PAKET MITRA</span>
             <span id="franchise-title2" class="franchise-title2">TEH TARIK JODI</span>
         </h1>
         <div class="stiker1">
@@ -423,12 +482,11 @@
             <div class="franchise-promo">
                 <h2>Dapatkan Promo Kemitraan Khusus</h2>
                 <p>*Klik untuk Potongan Hingga <span>25%</span></p>
-                <!-- FIXME: Routing button belum ada -->
                 <button>KLIK DI SINI</button>
+                <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-stiker-bottom-left">
+                <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-sticker-bottom-right">
             </div>
         </div>
-        <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-stiker-bottom-left">
-        <img src="{% static 'imgs/compress/stiker-bunga.webp' %}" alt="" class="franchise-sticker-bottom-right">
     </div>
 
     <!-- Menu Section -->
@@ -510,7 +568,7 @@
     </div>
 
     <!-- Contact Section -->
-    <div class="contact-section">
+    <div class="contact-section" id="contact">
         <div class="contact-banner">
             <img src="{% static 'imgs/compress/contact-banner.webp' %}" alt="">
         </div>
@@ -537,21 +595,20 @@
                         </div>
                     </div>
                     <div class="contact-button">
-                        <!-- FIXME: Routing button belum ada -->
                         <button>CONTACT US</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="company">
-            <h3>PT. AKSELERA DUA KARYA</h3>
-        </div>
-        <div class="stiker1">
-            <img src="{% static 'imgs/compress/stiker-j.webp' %}" alt="" srcset="">
-        </div>
-        <div class="stiker2">
-            <img src="{% static 'imgs/compress/stiker-teko.webp' %}" alt="" srcset="">
-        </div>
+        <h3>PT. AKSELERA DUA KARYA</h3>
+    </div>
+    <div class="stiker1">
+        <img src="{% static 'imgs/compress/stiker-j.webp' %}" alt="" srcset="">
+    </div>
+    <div class="stiker2">
+        <img src="{% static 'imgs/compress/stiker-teko.webp' %}" alt="" srcset="">
+    </div>
     </div>
 
     <!-- CircleType Initialization -->
