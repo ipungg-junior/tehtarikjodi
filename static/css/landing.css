@@ -329,7 +329,7 @@ header {
 }
 
 .title-image-row img {
-    max-width: 33.33%;
+    max-width: 44.44%;
     height: auto;
 }
 
@@ -1358,6 +1358,10 @@ header {
 .contact-banner {
     display: flex;
     justify-content: center;
+}
+
+.contact-banner a{
+    width: 50%;
 }
 
 .contact-banner img {
