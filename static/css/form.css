@@ -103,17 +103,28 @@ body {
     padding: 0.3em 0.35em;
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    width: 95vw;
+    padding-bottom: 2px;
+}
+
 .logo img {
-    position: absolute;
-    width: 40%;
-    top: -2%;
-    left: 28%;
+    max-width: 720px;
+    width: 50%;
+    object-fit: cover;
+}
+
+.logo a {
+    text-align: center;
+    width: inherit;
 }
 
 /* Form styles */
 .form-container {
     position: relative;
-    padding: 8em;
+    padding: 0em 8em 8em 8em;
 }
 
 .form-container h1 {
