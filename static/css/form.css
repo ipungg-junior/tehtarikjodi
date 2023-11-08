@@ -108,6 +108,8 @@ body {
     justify-content: center;
     width: 95vw;
     padding-bottom: 2px;
+    top: -20rem;
+    position: relative;
 }
 
 .logo img {
@@ -125,6 +127,7 @@ body {
 .form-container {
     position: relative;
     padding: 0em 8em 8em 8em;
+    top: -10rem;
 }
 
 .form-container h1 {
