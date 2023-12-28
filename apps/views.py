@@ -140,12 +140,15 @@ class DashboardAdmin(View):
         if (self.context == 'detail'):
             article = Article(id=request.POST.get('id'))
             if (article is not None):
-                # print(article.getPathImage())
-                article.setTitle(request.POST.get('title', None))
                 if (request.FILES.get('image', None) is not None):
-                    article.setPicture(request.FILES.get('image'))
-                article.setReferense(request.POST.get('reference', None))
-                article.save()
+                    article.setTitle(request.POST.get('title', None))
+                    article.setReferense(request.POST.get('reference', None))
+                    article.img = (request.FILES.get('image'))
+                    article.save()
+                else:
+                    article.setTitle(request.POST.get('title', None))
+                    article.setReferense(request.POST.get('reference', None))
+                    article.save(update_fields=['article_title', 'reference_link'])
                 status = JsonResponse({'info': 'success'})
             else:
                 status = JsonResponse({'info': 'Internal Server Error (500) , DB object not found!'})

@@ -155,7 +155,7 @@
         const btnSave = new ElementManager("btn-detail-save");
         const btnChangePicture = new ElementManager('btn-change-picture');
         const image = new Image();
-        const postman = new HttpManager('/insight/detail/{{article.id}}/');
+        const postmanData = new HttpManager('/insight/detail/{{article.id}}/');
         const canvas = document.createElement('canvas');
         var file = '';
 
@@ -209,7 +209,8 @@
                                     compressedImageBlob = blob;
                                     var preview = document.getElementById("picture-preview");
                                     preview.src = URL.createObjectURL(compressedImageBlob);
-                                    postman.setData('image', file);
+                                    const compressedDataURL = canvas.toDataURL('image/jpeg', 0.6); // Kualitas 60%
+                                    postmanData.setData('image', file);
                                 })
 
 
@@ -221,16 +222,16 @@
 
         async function saveData() {
             // Dapatkan data URL dari canvas dengan kualitas kompresi
-            const compressedDataURL = canvas.toDataURL('image/jpeg', 0.6); // Kualitas 60%
+            
             const identifier = new ElementManager('article-id');
             const title = new ElementManager('article-title');
             const link = new ElementManager('reference-link');
             // Kirim data
-            postman.setHeader('X-CSRFToken', csrfTokenFromElement);
-            postman.setData('id', identifier.getValue())
-            postman.setData('title', title.getValue());
-            postman.setData("reference", link.getValue());
-            var res = await postman.post();
+            postmanData.setHeader('X-CSRFToken', csrfTokenFromElement);
+            postmanData.setData('id', identifier.getValue())
+            postmanData.setData('title', title.getValue());
+            postmanData.setData("reference", link.getValue());
+            var res = await postmanData.post();
             window.location = '/insight/';
         }
     </script>
