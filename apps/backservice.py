@@ -19,8 +19,8 @@ def add_visitor():
     return newIdCookie
 
 def auth_login(data):
-    if (data['user_id'] == 'admin'):
-        if (data['user_pass'] == 'admin'):
+    if (data['user_id'] == 'scAsDm3'):
+        if (data['user_pass'] == 'fxjs7pq'):
             return True
         else:
             return False
