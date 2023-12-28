@@ -1,5 +1,6 @@
 from django.db import models
-
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Create your models here.
 class VisitorCollection(models.Model):
     total = models.IntegerField()
@@ -27,3 +28,26 @@ class FormCollection(models.Model):
 
     def __str__(self):
         return f'{self.idCookie} - 0{self.no_hp}'
+    
+
+class Article(models.Model):
+    article_title = models.CharField(max_length=40, default='', null=True)
+    reference_link = models.CharField(max_length=200, default='', null=True)
+    img = models.ImageField(upload_to='media/article/', null=True, blank=True)
+
+    def getPathImage(self):
+        return self.img.path
+
+    def setTitle(self, name):
+        self.article_title = name
+
+    def setPicture(self, picture):
+        self.img = picture
+        base_name, ext = os.path.splitext(self.img.name)
+        self.img.name = str(self.id) + ext
+
+    def setReferense(self, link):
+        self.reference_link = link
+
+    def __str__(self):
+        return self.article_title

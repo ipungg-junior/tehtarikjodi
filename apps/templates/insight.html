@@ -131,11 +131,57 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12 mt-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Artikel</h3>
+                            </div>
+                            <div class="list-group list-group-flush overflow-auto" style="max-height: 40rem">
+                                {% for article in article_list %}
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <a href="/insight/detail/{{article.id}}/">
+                                                <span class="avatar"><img src="{{article.img.url}}"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col text-truncate">
+                                            <a href="/insight/detail/{{article.id}}/"
+                                                class="text-body d-block">{{article.article_title}}</span></a>
+                                            <div class="text-muted text-truncate mt-n1"><a href="{{article.reference_link}}">link : {{article.reference_link}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                {% endfor %}   
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
-
+        <footer class="footer footer-transparent d-print-none">
+            <div class="container-xl">
+                <div class="row text-center align-items-center">
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item">
+                                Copyright &copy; 2023
+                                <a class="link-secondary">Sekawan Systema Group</a>.
+                                All rights reserved.
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="link-secondary" rel="noopener">
+                                    v1.1.0
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     <!-- Tabler Core -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>

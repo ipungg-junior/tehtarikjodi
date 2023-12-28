@@ -1,0 +1,240 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Teh Tarik Jodi</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="page-wrapper">
+            <!-- Page body -->
+            <div class="page-wrapper" style="margin-left: 10px; margin-right: 10px;">
+                <!-- Page header -->
+                <!-- Page header -->
+                <div class="page-header d-print-none">
+                    <div class="container-xl">
+                        <div class="row g-2 align-items-center">
+                            <div class="col">
+                                <!-- Page pre-title -->
+                                <div class="page-pretitle">
+                                    Artikel - {{article.article_title}}
+                                </div>
+                                <h2 class="page-title">
+                                    Detail
+                                </h2>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Page body -->
+                <div class="page-body">
+                    <div class="container-xl">
+                        <div class="row row-cards">
+                            <div class="col-md-12">
+                                <div class="row row-cards">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header"
+                                                style="display: flex; flex-direction: row; justify-content: space-between;">
+                                                <h3 class="card-title">Detail Artikel</h3>
+                                            </div>
+                                            <div class="col d-flex flex-column">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-auto"><span class="avatar avatar-xl"
+                                                                style="height: 240px; width: 205px;">
+                                                                <img src="{{article.img.url}}" id="picture-preview"
+                                                                    style="width: 98%; height: 98%; object-fit: cover;"></span>
+                                                        </div>
+                                                        <input type="file" id="newImage" accept="image/*" hidden>
+                                                        <div class="col">
+                                                            <div class="col-auto"><a id="btn-change-picture"
+                                                                    class="btn">
+                                                                    <i class="fa fa-camera me-2"></i>
+                                                                    Ganti
+                                                                </a></div>
+                                                            <!-- <div class="col-auto mt-2"><a href="#" class="btn btn-ghost-danger">
+                                          <i class="fa fa-trash me-2"></i>
+                                          Delete Permanently
+                                        </a></div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row g-3 mt-2">
+                                                        <div class="col-md-1">
+                                                            <div class="form-label">ID</div>
+                                                            <input type="text" class="form-control"
+                                                                value="{{article.id}}" id="article-id" disabled>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-label">Judul</div>
+                                                            <input type="text" class="form-control"
+                                                                value="{{article.article_title}}" id="article-title">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-label">Referensi Tautan</div>
+                                                            <input type="text" class="form-control"
+                                                                value="{{article.reference_link}}" id="reference-link">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card-footer bg-transparent mt-auto">
+                                                    <div class="btn-list justify-content-end">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{article.id}}"
+                                                            id="article-id">
+                                                        <a id="btn-detail-save" class="btn btn-primary">
+                                                            Save
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+            <div class="container-xl">
+                <div class="row text-center align-items-center">
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item">
+                                Copyright &copy; 2023
+                                <a class="link-secondary">Sekawan Systema Group</a>.
+                                All rights reserved.
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="link-secondary" rel="noopener">
+                                    v1.1.0
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Tabler Core -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <!-- convert to xls library js -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="{% static 'systemajs/utils.js' %}"></script>
+
+    <script>
+        var csrfTokenFromElement = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        const btnSave = new ElementManager("btn-detail-save");
+        const btnChangePicture = new ElementManager('btn-change-picture');
+        const image = new Image();
+        const postman = new HttpManager('/insight/detail/{{article.id}}/');
+        const canvas = document.createElement('canvas');
+        var file = '';
+
+        btnSave.click(saveData);
+        btnChangePicture.click(selectAndUploadImage);
+
+        function selectAndUploadImage() {
+            const newImageInput = document.getElementById('newImage');
+            newImageInput.click(); // Memunculkan dialog pemilihan gambar
+
+            newImageInput.addEventListener('change', function () {
+                file = newImageInput.files[0];
+
+                if (file) {
+
+                    // Cek ukuran gambar
+                    if (file.size > 2000000) { // 1 MB (dalam byte)
+                        alert('Ukuran gambar terlalu besar. Maksimum 2 MB diizinkan.');
+                        newImageInput.value = '';
+                        return;
+                    }
+
+                    else {
+
+                        image.src = URL.createObjectURL(file);
+
+                        image.onload = function () {
+                            const maxWidth = 650; // Lebar maksimum gambar
+                            const maxHeight = 800; // Tinggi maksimum gambar
+                            let width = image.width;
+                            let height = image.height;
+
+                            // Periksa apakah gambar melebihi batas lebar atau tinggi
+                            if (width > maxWidth || height > maxHeight) {
+                                if (width / maxWidth > height / maxHeight) {
+                                    width = maxWidth;
+                                    height = Math.round(maxWidth * (image.height / image.width));
+                                } else {
+                                    height = maxHeight;
+                                    width = Math.round(maxHeight * (image.width / image.height));
+                                }
+                            }
+
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(image, 0, 0, width, height);
+
+                            const blob = canvas.toBlob(
+                                (blob) => {
+                                    compressedImageBlob = blob;
+                                    var preview = document.getElementById("picture-preview");
+                                    preview.src = URL.createObjectURL(compressedImageBlob);
+                                    postman.setData('image', file);
+                                })
+
+
+                        };
+                    }
+                }
+            });
+        }
+
+        async function saveData() {
+            // Dapatkan data URL dari canvas dengan kualitas kompresi
+            const compressedDataURL = canvas.toDataURL('image/jpeg', 0.6); // Kualitas 60%
+            const identifier = new ElementManager('article-id');
+            const title = new ElementManager('article-title');
+            const link = new ElementManager('reference-link');
+            // Kirim data
+            postman.setHeader('X-CSRFToken', csrfTokenFromElement);
+            postman.setData('id', identifier.getValue())
+            postman.setData('title', title.getValue());
+            postman.setData("reference", link.getValue());
+            var res = await postman.post();
+            window.location = '/insight/';
+        }
+    </script>
+
+</body>
+
+</html>

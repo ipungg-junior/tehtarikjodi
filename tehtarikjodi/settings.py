@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*7)ui2ha-c%#1y6#^1=7)acy6dtq=x4!248u%1o00gha&=i6%)'
 DEBUG = True
 
-ALLOWED_HOSTS = ['tehtarikjodi.com', 'www.tehtarikjodi.com']
+ALLOWED_HOSTS = ['tehtarikjodi.com', 'www.tehtarikjodi.com', '127.0.0.1']
 
 
 # Application definition
@@ -96,3 +96,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "/Backup Lenovo/UBAID/tehtarikjodi/"
+#MEDIA_ROOT = "/root/tehtarikjodi/"
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

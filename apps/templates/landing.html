@@ -318,43 +318,26 @@
             <img src="{% static 'imgs/compress/stiker-harimau-orange.webp' %}" alt="">
         </div>
         <div class="partner-article">
+            {% for article in article_list %}
             <div class="article-container">
                 <div class="article-header">
                     <div class="article-title">
-                        <h4>Belum Buka Udah Antri!</h4>
-                        <p>seloinfo.id</p>
+                        <h4><a href="{{article.reference_link}}" style="color: inherit;">{{article.article_title}}</a></h4>
                     </div>
 
                 </div>
                 <div class="article-img">
-                    <img src="{% static 'imgs/compress/partner1.webp' %}" alt="">
+                    <img src="{{ article.img.url }}" alt="">
                 </div>
                 <div class="article-footer">
-                    <a href="404/">
+                    <a href="{{article.reference_link}}">
                         <div class="article-button">
-                            <a href="link">Baca Artikel ></a>
+                            <a href="{{article.reference_link}}">Baca Artikel ></a>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="article-container">
-                <div class="article-header">
-                    <div class="article-title">
-                        <h4>Sedapnya Bisnis Teh Tarik Asal ...</h4>
-                        <p>solopos.com</p>
-                    </div>
-                </div>
-                <div class="article-img">
-                    <img src="{% static 'imgs/compress/partner2.webp' %}" alt="">
-                </div>
-                <div class="article-footer">
-                    <a href="404/">
-                        <div class="article-button">
-                            <a href="link">Baca Artikel ></a>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="partners-showcase" style="margin-top: 3em;">
             <div class="partner-pattern-top"></div>

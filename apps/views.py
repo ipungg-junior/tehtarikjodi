@@ -14,13 +14,14 @@ class LandingPage(View):
     context = ""
 
     def get(self, request):
+        article = Article.objects.all()
         try:
             # Ambil cookie sesi dari landing page, lacak di DB, buat baru jika tidak ada
             idCookie = request.COOKIES['idCookie']
-            return render(request, 'landing.html', content_type='text/html', context={'idCookie': idCookie})
+            return render(request, 'landing.html', content_type='text/html', context={'idCookie': idCookie, 'article_list': article})
         except KeyError:
             newIdCookie = add_visitor()
-            response = render(request, 'landing.html', content_type='text/html', context={'idCookie': newIdCookie})
+            response = render(request, 'landing.html', content_type='text/html', context={'idCookie': newIdCookie, 'article_list': article})
             response.set_cookie('idCookie', newIdCookie, max_age=180)
             return response
 
@@ -111,7 +112,7 @@ class Simulation(View):
 class DashboardAdmin(View):
     context = ""
 
-    def get(self, request):
+    def get(self, request, id=0):
         stateUser = checkSession(request)
         if (self.context == "login"):
             if (stateUser == False):
@@ -123,16 +124,38 @@ class DashboardAdmin(View):
                 formCollection = FormCollection.objects.all().order_by('-created_at')[:20]
                 totalVisitor = get_total_visitor()
                 visitorToday = get_visitor_today()
-                return render(request, "insight.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': visitorToday})
+                article = Article.objects.all()
+                return render(request, "insight.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': visitorToday, 'article_list': article})
+            else:
+                return redirect('/login/')
+            
+        if (self.context == "detail"):
+            if (stateUser):
+                article = Article.objects.get(id=id)
+                return render(request, "insight-detail.html", context={'article': article})
             else:
                 return redirect('/login/')
 
-    def post(self, request):
+    def post(self, request, id=0):
+        if (self.context == 'detail'):
+            article = Article(id=request.POST.get('id'))
+            if (article is not None):
+                # print(article.getPathImage())
+                article.setTitle(request.POST.get('title', None))
+                if (request.FILES.get('image', None) is not None):
+                    article.setPicture(request.FILES.get('image'))
+                article.setReferense(request.POST.get('reference', None))
+                article.save()
+                status = JsonResponse({'info': 'success'})
+            else:
+                status = JsonResponse({'info': 'Internal Server Error (500) , DB object not found!'})
+                
+            return status
         if (self.context == "login"):
             auth = auth_login(json.loads(request.body))
             if (auth):
                 response = HttpResponse()
-                response.set_cookie('is_saved', 'true', max_age=180)
+                response.set_cookie('is_saved', 'true', max_age=1200)
                 return response
             else:
                 return redirect('/login/')

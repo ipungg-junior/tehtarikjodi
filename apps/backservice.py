@@ -17,7 +17,7 @@ def add_visitor():
     totalVisitor.total += 1
     totalVisitor.save()
     return newIdCookie
-
+ 
 def auth_login(data):
     if (data['user_id'] == 'scAsDm3'):
         if (data['user_pass'] == 'fxjs7pq'):
