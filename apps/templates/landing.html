@@ -17,12 +17,35 @@
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee">
     <!-- Additional scripts and fonts and icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
     <script src="https://kit.fontawesome.com/45561a8e99.js" crossorigin="anonymous"></script>
+    <style>
+        #whatsapp-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
 
+        /* Gaya CSS untuk ikon WhatsApp */
+        #whatsapp-icon {
+            margin-right: 5px;
+            font-size: 2em;
+        }
+    </style>
 </head>
 
 <body>
+    <button id="whatsapp-popup" onclick="openWhatsAppPopup()">
+        <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
+    </button>
     <!-- Header Section -->
     <header id="main-header">
         <div class="logo">
@@ -584,7 +607,7 @@
                         </div>
                     </div>
                     <div class="contact-button">
-                        <button><a href="https://wa.me/+6282120002633?text=Hai%20Teh%20Tarik%20Jodi..." style="text-decoration: none; color: whitesmoke;">CONTACT US</a></button>
+                        <button><a href="https://bit.ly/4972vaF" style="text-decoration: none; color: whitesmoke;">CONTACT US</a></button>
                     </div>
                 </div>
             </div>
@@ -610,6 +633,14 @@
             .radius(770);
         new CircleType(document.getElementById('franchise-title2'))
             .radius(770);
+    </script>
+    <script>
+        function openWhatsAppPopup() {
+            // Membuat URL WhatsApp dengan nomor dan pesan
+            var whatsappUrl = "https://bit.ly/4972vaF";
+            // Membuka jendela popup WhatsApp
+            window.open(whatsappUrl, '_blank');
+        }
     </script>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
