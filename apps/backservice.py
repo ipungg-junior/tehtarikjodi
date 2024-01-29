@@ -11,12 +11,15 @@ def generate_random_string():
     return random_string
 
 def add_visitor():
-    newIdCookie = generate_random_string()
-    newVisitor = VisitorRecord(idCookie=newIdCookie)
-    newVisitor.save()
-    totalVisitor.total += 1
-    totalVisitor.save()
-    return newIdCookie
+    try:
+        newIdCookie = generate_random_string()
+        newVisitor = VisitorRecord(idCookie=newIdCookie)
+        newVisitor.save()
+        totalVisitor.total += 1
+        totalVisitor.save()
+        return newIdCookie
+    except:
+        return 0
  
 def auth_login(data):
     if (data['user_id'] == 'scAsDm3'):
@@ -41,4 +44,8 @@ def get_total_visitor():
 def get_visitor_today():
     today = datetime.date.today()
     visitor = VisitorRecord.objects.filter(datetime__date=today).count
+    return visitor
+
+def get_visittor_by_date(date):
+    visitor = VisitorRecord.objects.filter(datetime__year=date.year, datetime__month=date.month, datetime__day=date.day)
     return visitor

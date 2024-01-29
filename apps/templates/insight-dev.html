@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Teh Tarik Jodi</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="page-wrapper">
+            <!-- Page header -->
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <!-- Page pre-title -->
+                            <div class="page-pretitle">
+                                Teh Tarik Jodi
+                            </div>
+                            <h2 class="page-title">
+                                Insight
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Page body -->
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-deck row-cards">
+                        <!-- Start content body -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Total Pengunjung</div>
+                                    </div>
+                                    <div class="h1 mb-3">{{total_visitor}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Pengunjung Hari Ini</div>
+                                    </div>
+                                    <div class="h1 mb-3">{{visitor_today}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header space-between">
+                                    <h3 class="card-title">Visitor Tracking Table</h3>
+                                    <div class="card-actions">
+                                    <div class="col-md-12">
+                                    <label class="form-label">Date</label>
+                                    <input class="form-control mb-2" placeholder="Select a date" id="datepicker" value="2020-06-20"/>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="table-responsive" style="overflow-y: scroll; height: 350px;">
+                                    <table class="table card-table table-vcenter text-nowrap datatable" id="data-table-visitor">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-1">No.
+                                                </th>
+                                                <th>Sesi ID</th>
+                                                <th>Tanggal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in visitor_data %}
+                                            <tr>
+                                                <td><span class="number">{{ forloop.counter }}</span></td>
+                                                <td>{{obj.idCookie}}</td>
+                                                <td>{{obj.datetime}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% csrf_token %}
+                                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                                <script>
+                                    var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+                                    async function readJson(dateStr){
+                                        const res = await fetch('/insight/filter-visitor/', {
+                                            method: 'POST',
+                                            headers: {
+                                              'X-CSRFToken': csrfToken,
+                                              'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(dateStr)
+                                          })
+                                        
+                                          const data = await res.json();
+                                          const entries = Object.entries(data);
+                                          updateTable(entries);
+                                          
+                                    }
+                                
+
+                                    function updateTable(dataArray){
+                                        const tbl = document.getElementById('data-table-visitor');
+                                        const tbody = tbl.querySelector('tbody');
+                                        // Membersihkan isi tbody
+                                        tbody.innerHTML = '';
+
+                                        // Melakukan perulangan pada setiap pasangan kunci-nilai
+                                        for (const [key, item] of (dataArray)) {
+                                            // Melakukan console log pada setiap properti item
+                                            const tr = document.createElement('tr');
+                                            const tdNumber = document.createElement('td');
+                                            tdNumber.innerHTML = `<span class="number">${key}</span>`;
+                                            tr.appendChild(tdNumber);
+
+                                            const tdIdCookie = document.createElement('td');
+                                            tdIdCookie.textContent = item.idCookie;
+                                            tr.appendChild(tdIdCookie);
+
+                                            const tdDatetime = document.createElement('td');
+                                            tdDatetime.textContent = item.datetime;
+                                            tr.appendChild(tdDatetime);
+                                            tbody.appendChild(tr);
+                                        }
+                                    }
+
+                                    flatpickr("#datepicker", {
+                                        dateFormat: "d-m-Y",
+                                        defaultDate: "today",
+                                        onChange: function(selectedDates, dateStr, instance) {
+                                            readJson(dateStr);
+                                        }
+                                    });
+
+                                </script>
+                                <div class="card-footer d-flex align-items-center">
+                                    <button onclick="ExportToExcel('xlsx')">Export XLS</button>
+                                </div>
+                                <script>
+                                    function ExportToExcel(type, fn, dl) {
+                                        var elt = document.getElementById('data-table-visitor');
+                                        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+                                        return dl ?
+                                            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                            XLSX.writeFile(wb, fn || ('export_data_visitor_tehtarikjodi.' + (type || 'xlsx')));
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Form Collection</h3>
+                                </div>
+                                <div class="table-responsive" style="overflow-y: scroll; height: 350px;">
+                                    <table class="table card-table table-vcenter text-nowrap datatable" id="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-1">No.
+                                                </th>
+                                                <th>Sesi ID</th>
+                                                <th>Nomor Hp</th>
+                                                <th>Cup</th>
+                                                <th>omset kotor</th>
+                                                <th>laba kotor</th>
+                                                <th>laba bersih</th>
+                                                <th>karyawan</th>
+                                                <th>listrik</th>
+                                                <th>lain-lain</th>
+                                                <th>total operasional</th>
+                                                <th>sewa bangunan</th>
+                                                <th>bep</th>
+                                                <th>waktu</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for obj in collections %}
+                                            <tr>
+                                                <td><span class="number">{{ forloop.counter }}</span></td>
+                                                <td>{{obj.idCookie}}</td>
+                                                <td>{{obj.no_hp}}</td>
+                                                <td>{{obj.jumlah_cup}}</td>
+                                                <td>{{obj.omset_kotor}}</td>
+                                                <td>{{obj.laba_kotor}}</td>
+                                                <td>{{obj.laba_bersih}}</td>
+                                                <td>{{obj.karyawan}}</td>
+                                                <td>{{obj.listrik}}</td>
+                                                <td>{{obj.lain}}</td>
+                                                <td>{{obj.operasional}}</td>
+                                                <td>{{obj.sewa_bangunan}}</td>
+                                                <td>{{obj.bep}}</td>
+                                                <td>{{obj.created_at}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer d-flex align-items-center">
+                                    <button onclick="ExportToExcel('xlsx')">Export XLS</button>
+                                </div>
+                                <script>
+                                    function ExportToExcel(type, fn, dl) {
+                                        var elt = document.getElementById('data-table');
+                                        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+                                        return dl ?
+                                            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                                            XLSX.writeFile(wb, fn || ('export_data_tehtarikjodi.' + (type || 'xlsx')));
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Artikel</h3>
+                            </div>
+                            <div class="list-group list-group-flush overflow-auto" style="max-height: 40rem">
+                                {% for article in article_list %}
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <a href="/insight/detail/{{article.id}}/">
+                                                <span class="avatar"><img src="{{article.img.url}}"></span>
+                                            </a>
+                                        </div>
+                                        <div class="col text-truncate">
+                                            <a href="/insight/detail/{{article.id}}/"
+                                                class="text-body d-block">{{article.article_title}}</span></a>
+                                            <div class="text-muted text-truncate mt-n1"><a href="{{article.reference_link}}">link : {{article.reference_link}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                {% endfor %}   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+            <div class="container-xl">
+                <div class="row text-center align-items-center">
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item">
+                                Copyright &copy; 2023
+                                <a class="link-secondary">Sekawan Systema Group</a>.
+                                All rights reserved.
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="link-secondary" rel="noopener">
+                                    v1.1.0
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Tabler Core -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <!-- convert to xls library js -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+</body>
+
+</html>

@@ -7,6 +7,7 @@ from django.http import JsonResponse, HttpResponse
 from .models import *
 from .backservice import *
 import json, datetime
+from django.core.serializers import serialize
 
 
 @method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
@@ -22,7 +23,7 @@ class LandingPage(View):
         except KeyError:
             newIdCookie = add_visitor()
             response = render(request, 'landing.html', content_type='text/html', context={'idCookie': newIdCookie, 'article_list': article})
-            response.set_cookie('idCookie', newIdCookie, max_age=180)
+            response.set_cookie('idCookie', newIdCookie, max_age=1800)
             return response
 
     def post(self, request):
@@ -121,11 +122,14 @@ class DashboardAdmin(View):
                 return redirect('/insight/')
         if (self.context == "insight"):
             if (stateUser):
+                now = datetime.date.today()
                 formCollection = FormCollection.objects.all().order_by('-created_at')[:20]
                 totalVisitor = get_total_visitor()
                 visitorToday = get_visitor_today()
+                visitor_with_datenow = get_visittor_by_date(now)
                 article = Article.objects.all()
-                return render(request, "insight.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': visitorToday, 'article_list': article})
+                
+                return render(request, "insight-dev.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': visitorToday, 'visitor_data': visitor_with_datenow, 'article_list': article})
             else:
                 return redirect('/login/')
             
@@ -158,12 +162,26 @@ class DashboardAdmin(View):
             auth = auth_login(json.loads(request.body))
             if (auth):
                 response = HttpResponse()
-                response.set_cookie('is_saved', 'true', max_age=1200)
+                response.set_cookie('is_saved', 'true', max_age=5200)
                 return response
             else:
                 return redirect('/login/')
         if (self.context == "logout"):
             return redirect('')
+
+        if (self.context == "filter-visitor-by-date"):
+            search_date = json.loads(request.body)
+            search_date = datetime.datetime.strptime(search_date, "%d-%m-%Y")
+            visitor_with_date = get_visittor_by_date(search_date)
+            jsonDump = {}
+            for idx, i in enumerate(visitor_with_date):
+                idx += 1
+                jsonItem = {}  
+                jsonItem['idCookie'] = i.idCookie
+                jsonItem['datetime'] = (f'{i.datetime.day}/{i.datetime.month}/{i.datetime.year}  {i.datetime.hour}:{i.datetime.minute}')
+                jsonDump[idx] = jsonItem
+            ret = JsonResponse(jsonDump, safe=False)
+            return ret
 
 
 @method_decorator(cache_control(no_cache=True, must_revalidate=True), name='dispatch')
