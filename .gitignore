@@ -4,4 +4,4 @@
 *.db
 *.pyc
 apps/__pycache__
-/root/tehtarikjodi/tehtarikjodi/settings.py
+tehtarikjodi/settings.py
