@@ -125,11 +125,14 @@ class DashboardAdmin(View):
                 now = datetime.date.today()
                 formCollection = FormCollection.objects.all().order_by('-created_at')[:20]
                 totalVisitor = get_total_visitor()
-                visitorToday = get_visitor_today()
+                visitorToday = get_visittor_by_date(now)
                 visitor_with_datenow = get_visittor_by_date(now)
                 article = Article.objects.all()
-                
-                return render(request, "insight-dev.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': visitorToday, 'visitor_data': visitor_with_datenow, 'article_list': article})
+                count_today = 0
+                for i in visitorToday:
+                    if (now.day == i.datetime.day):
+                        count_today += 1
+                return render(request, "insight-dev.html", context={'collections': formCollection, 'total_visitor':totalVisitor, 'visitor_today': count_today, 'visitor_data': visitor_with_datenow, 'article_list': article})
             else:
                 return redirect('/login/')
             
@@ -174,12 +177,14 @@ class DashboardAdmin(View):
             search_date = datetime.datetime.strptime(search_date, "%d-%m-%Y")
             visitor_with_date = get_visittor_by_date(search_date)
             jsonDump = {}
+            count_idx = 1
             for idx, i in enumerate(visitor_with_date):
-                idx += 1
-                jsonItem = {}  
-                jsonItem['idCookie'] = i.idCookie
-                jsonItem['datetime'] = (f'{i.datetime.day}/{i.datetime.month}/{i.datetime.year}  {i.datetime.hour}:{i.datetime.minute}')
-                jsonDump[idx] = jsonItem
+                if (search_date.day == i.datetime.day):
+                    jsonItem = {}  
+                    jsonItem['idCookie'] = i.idCookie
+                    jsonItem['datetime'] = (f'{i.datetime.day}/{i.datetime.month}/{i.datetime.year}')
+                    jsonDump[count_idx] = jsonItem
+                    count_idx += 1
             ret = JsonResponse(jsonDump, safe=False)
             return ret
 

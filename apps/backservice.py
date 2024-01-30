@@ -43,8 +43,12 @@ def get_total_visitor():
 
 def get_visitor_today():
     today = datetime.date.today()
-    visitor = VisitorRecord.objects.filter(datetime__date=today).count
-    return visitor
+    visitor = VisitorRecord.objects.filter(datetime__day=today.day)
+    data = 0
+    for v in visitor:
+        if (v.datetime.day == today.day):
+            data += 1
+    return data 
 
 def get_visittor_by_date(date):
     visitor = VisitorRecord.objects.filter(datetime__year=date.year, datetime__month=date.month, datetime__day=date.day)
