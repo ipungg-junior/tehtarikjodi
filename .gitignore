@@ -3,6 +3,8 @@
 *.sqlite3
 *.db
 *.pyc
+sync_db.py
+/root/tehtarikjodi/sync_db.py
 apps/__pycache__
 apps/migrations/
 /root/tehtarikjodi/apps/migrations/
