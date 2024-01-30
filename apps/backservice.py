@@ -22,8 +22,8 @@ def add_visitor():
         return 0
  
 def auth_login(data):
-    if (data['user_id'] == 'scAsDm3'):
-        if (data['user_pass'] == 'fxjs7pq'):
+    if (data['user_id'] == 'admin'):
+        if (data['user_pass'] == 'admin'):
             return True
         else:
             return False

@@ -46,3 +46,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.article_title
+    
+class TestingTable(models.Model):
+    testing_title = models.CharField(max_length=40, default='', null=True)
+    
+    def __str__(self):
+        return self.testing_title
