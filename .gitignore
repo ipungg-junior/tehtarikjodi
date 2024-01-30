@@ -4,4 +4,6 @@
 *.db
 *.pyc
 apps/__pycache__
+apps/migrations/
+/root/tehtarikjodi/apps/migrations/
 tehtarikjodi/settings.py
